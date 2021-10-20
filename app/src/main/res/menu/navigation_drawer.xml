@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+            android:id="@+id/group1"
+            android:checkableBehavior="single">
+        <item
+                android:id="@+id/planned"
+                android:icon="@drawable/ic_plan"
+                android:title="@string/menu_planned" />
+        <item
+                android:id="@+id/clocking"
+                android:icon="@drawable/ic_clocking"
+                android:title="@string/menu_clocking" />
+        <item
+                android:id="@+id/abrequest"
+                android:icon="@drawable/ic_abrequest"
+                android:title="@string/menu_abrequest" />
+        <item
+                android:id="@+id/actual"
+                android:icon="@drawable/ic_actual"
+                android:title="@string/menu_actual" />
+        <item
+                android:id="@+id/contact"
+                android:icon="@drawable/ic_contact"
+                android:title="@string/menu_contact" />
+    </group>
+    <group
+            android:id="@+id/group2"
+            android:checkableBehavior="single">
+        <item
+                android:id="@+id/pwchange"
+                android:icon="@drawable/ic_password"
+                android:title="@string/menu_pwchange" />
+        <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/menu_logout" />
+    </group>
+</menu>
