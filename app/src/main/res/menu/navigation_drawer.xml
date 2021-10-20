@@ -6,7 +6,8 @@
         <item
                 android:id="@+id/planned"
                 android:icon="@drawable/ic_plan"
-                android:title="@string/menu_planned" />
+                android:title="@string/menu_planned"
+                android:checked="true"/>
         <item
                 android:id="@+id/clocking"
                 android:icon="@drawable/ic_clocking"
