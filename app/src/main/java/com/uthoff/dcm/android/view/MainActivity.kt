@@ -20,9 +20,6 @@ import com.google.gson.GsonBuilder
 
 import com.google.gson.Gson
 
-
-
-
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

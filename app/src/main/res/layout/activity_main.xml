@@ -8,13 +8,7 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-    <LinearLayout
-            android:id="@+id/layout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true">
@@ -22,8 +16,11 @@
         <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
-                android:fitsSystemWindows="true">
+                android:fitsSystemWindows="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/appBarLayout">
 
             <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/topAppBar"
@@ -35,7 +32,18 @@
                     android:background="@android:color/transparent"
                     android:elevation="0dp" />
         </com.google.android.material.appbar.AppBarLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:name="com.uthoff.dcm.android.view.fragments.PlannedFragment"
+                android:id="@+id/layout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigationView"

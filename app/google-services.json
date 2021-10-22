@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "170275728503",
+    "project_id": "dcm-schichtplan",
+    "storage_bucket": "dcm-schichtplan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170275728503:android:d213d435924c3720376a72",
+        "android_client_info": {
+          "package_name": "com.uthoff.dcm.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170275728503-fn5lq3bmostdrrjsnjtm2i3bo2151fd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD21Fchkf_kYghNkUvUHZlLpR_uI9aXVlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170275728503-fn5lq3bmostdrrjsnjtm2i3bo2151fd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
