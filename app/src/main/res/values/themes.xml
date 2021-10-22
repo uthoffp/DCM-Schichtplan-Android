@@ -13,5 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:windowTranslucentStatus">true</item>
         <!-- Customize your theme here. -->
+        <item name="android:textAppearance">@style/TextViewStyle</item>
+    </style>
+
+    <style name="TextViewStyle" parent="@android:style/TextAppearance">
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

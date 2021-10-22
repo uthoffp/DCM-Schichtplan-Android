@@ -6,14 +6,51 @@
         android:layout_height="match_parent"
         tools:context=".view.fragments.PasswordChangeFragment">
 
+    <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            tools:src="@tools:sample/avatars"
+            android:id="@+id/imageView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="24dp"
+            app:srcCompat="@color/purple_200"
+            tools:srcCompat="@color/purple_200" />
+
     <TextView
+            android:text="Company Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kontakt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/txtTest" />
+            android:id="@+id/frag_contact_txt_name"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            android:layout_marginTop="8dp" />
 
+    <TextView
+            android:text="Street 123"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/frag_contact_txt_street"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/frag_contact_txt_name"
+            android:layout_marginTop="8dp" />
+
+    <TextView
+            android:text="Post Code, City"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/frag_contact_txt_postcode"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/frag_contact_txt_street"
+            android:layout_marginTop="8dp" />
+
+    <TextView
+            android:text="Phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/frag_contact_txt_phone"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/frag_contact_txt_postcode"
+            android:layout_marginTop="8dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
