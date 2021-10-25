@@ -15,4 +15,6 @@
     <string name="hint_pwconfirm">Passwort wiederholen</string>
     <string name="hint_pwnew">Neues Passwort</string>
     <string name="btn_pwchange">Passwort ändern</string>
+    <string name="hint_nextweek">Nächste Woche</string>
+    <string name="next_prevweek">Vorherige Woche</string>
 </resources>

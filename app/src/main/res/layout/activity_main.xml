@@ -63,6 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:gravity="center"
+                    android:textSize="12sp"
                     android:text="@string/menu_footer" />
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
