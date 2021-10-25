@@ -22,7 +22,7 @@
                 app:fabSize="mini"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:contentDescription="@string/next_prevweek"
+                android:contentDescription="@string/hint_prevweek"
                 android:focusable="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

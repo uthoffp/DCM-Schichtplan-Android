@@ -55,11 +55,11 @@
             android:layout_marginTop="8dp" />
 
     <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/login_sp_company"
+            android:id="@+id/frag_ab_request_type"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Unternehmen wählen"
+            android:hint="@string/hint_company"
             app:layout_constraintStart_toStartOf="@+id/login_txt_company_head"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
@@ -77,15 +77,15 @@
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/login_sp_company"
-            app:layout_constraintStart_toStartOf="@+id/login_sp_company"
+            app:layout_constraintEnd_toEndOf="@+id/frag_ab_request_type"
+            app:layout_constraintStart_toStartOf="@+id/frag_ab_request_type"
             android:layout_marginEnd="16dp"
-            android:hint="Benutzername"
+            android:hint="@string/hint_username"
             app:startIconDrawable="@drawable/ic_user"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/login_input_username"
+            android:id="@+id/frag_abrequest_in_comment"
             android:layout_marginStart="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/login_sp_company"
+            app:layout_constraintTop_toBottomOf="@+id/frag_ab_request_type"
             android:layout_marginTop="16dp">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -97,8 +97,8 @@
     <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/login_sp_company"
-            app:layout_constraintStart_toStartOf="@+id/login_sp_company"
+            app:layout_constraintEnd_toEndOf="@+id/frag_ab_request_type"
+            app:layout_constraintStart_toStartOf="@+id/frag_ab_request_type"
             android:layout_marginEnd="16dp"
             android:hint="@string/hint_oldpw"
             app:endIconMode="password_toggle"
@@ -107,7 +107,7 @@
             android:id="@+id/login_input_pw"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/login_input_username">
+            app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_in_comment">
 
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -120,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button"
-            android:text="Anmelden"
+            android:text="@string/btn_login"
             app:layout_constraintTop_toBottomOf="@+id/login_input_pw"
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"

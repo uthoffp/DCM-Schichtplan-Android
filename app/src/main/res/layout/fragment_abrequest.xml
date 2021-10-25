@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragments.PasswordChangeFragment"
+        android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/frag_ab_request_type"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_abtype"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="16dp">
+
+            <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+                android:text="@string/txt_startDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/frag_abrequest_txt_start"
+                app:layout_constraintTop_toBottomOf="@+id/frag_ab_request_type"
+                app:layout_constraintStart_toStartOf="@+id/frag_ab_request_type"
+                android:layout_marginTop="24dp"
+                android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/frag_anrequest_sp_start_day"
+                app:startIconDrawable="@drawable/ic_plan"
+                app:layout_constraintStart_toStartOf="@+id/frag_abrequest_txt_start"
+                app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_txt_start"
+                app:layout_constraintEnd_toStartOf="@+id/frag_anrequest_sp_start_type"
+                android:layout_marginEnd="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="01.01.1900"
+                    android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/frag_anrequest_sp_start_type"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_txt_start">
+
+            <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" 1 Tag"
+                    android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+                android:text="@string/txt_stopDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/frag_abrequest_txt_stop"
+                app:layout_constraintTop_toBottomOf="@+id/frag_anrequest_sp_start_day"
+                app:layout_constraintStart_toStartOf="@+id/frag_abrequest_txt_start"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/frag_abrequest_sp_stop_day"
+                app:startIconDrawable="@drawable/ic_plan"
+                app:layout_constraintStart_toStartOf="@+id/frag_abrequest_txt_stop"
+                app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_txt_stop"
+                app:layout_constraintEnd_toStartOf="@+id/frag_abrequest_sp_stop_type"
+                android:layout_marginEnd="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="01.01.1900"
+                    android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/frag_abrequest_sp_stop_type"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_txt_stop">
+
+            <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" 1 Tag"
+                    android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_comment"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/frag_abrequest_in_comment"
+                app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_sp_stop_day"
+                app:layout_constraintStart_toStartOf="@+id/frag_abrequest_sp_stop_day"
+                app:layout_constraintEnd_toEndOf="@+id/frag_abrequest_sp_stop_type"
+                android:layout_marginTop="24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+                android:id="@+id/frag_abrequest_btn_attach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_attach"
+                app:icon="@drawable/ic_attachment"
+                style="?attr/materialButtonOutlinedStyle"
+                app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_in_comment"
+                app:layout_constraintStart_toStartOf="@+id/frag_abrequest_in_comment"
+                android:layout_marginTop="8dp" />
+
+        <Button
+                android:id="@+id/frag_abrequest_btn_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button"
+                android:text="@string/hint_abcheck"
+                app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_btn_attach"
+                app:layout_constraintEnd_toEndOf="@+id/frag_abrequest_sp_stop_type"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

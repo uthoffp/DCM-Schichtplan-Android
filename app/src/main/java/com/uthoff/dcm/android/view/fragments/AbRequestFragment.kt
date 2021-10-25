@@ -20,6 +20,6 @@ class AbRequestFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_ab_request, container, false)
+        return inflater.inflate(R.layout.fragment_abrequest, container, false)
     }
 }
