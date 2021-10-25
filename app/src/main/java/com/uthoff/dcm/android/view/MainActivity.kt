@@ -3,11 +3,14 @@ package com.uthoff.dcm.android.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.datasource.Webservice
 import com.uthoff.dcm.android.view.fragments.*
@@ -19,6 +22,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.GsonBuilder
 
 import com.google.gson.Gson
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+
+
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +56,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
+        val gson = GsonBuilder().setLenient().create()
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.168.56.1:8080")
@@ -78,5 +83,8 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.layout, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    override fun onBackPressed() {
     }
 }
