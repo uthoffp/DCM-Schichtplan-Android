@@ -43,12 +43,12 @@ class AbRequestFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setUpUi(view: View) {
-        spType = view.findViewById(R.id.frag_ab_request_type)
+        spType = view.findViewById(R.id.login_in_company)
         inStartDate = view.findViewById(R.id.frag_anrequest_et_start_day)
         spStartType = view.findViewById(R.id.frag_anrequest_sp_start_type)
         inStopDate = view.findViewById(R.id.frag_anrequest_et_stop_day)
         spStopType = view.findViewById(R.id.frag_abrequest_sp_stop_type)
-        inComment = view.findViewById(R.id.frag_abrequest_in_comment)
+        inComment = view.findViewById(R.id.login_in_username)
         btnAttach = view.findViewById(R.id.frag_abrequest_btn_attach)
         btnCheck = view.findViewById(R.id.frag_abrequest_btn_check)
 

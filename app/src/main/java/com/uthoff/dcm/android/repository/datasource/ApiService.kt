@@ -11,8 +11,9 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface ApiService {
-    @GET("/")
-    fun getLandingPage(): Call<String>
+
+    @GET("/company")
+    suspend fun getAllCompanies() : Response<List<Company>>
 
     @GET("/company/{cId}")
     suspend fun getCompanyData(

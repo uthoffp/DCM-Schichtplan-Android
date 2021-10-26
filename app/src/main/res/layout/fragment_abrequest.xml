@@ -12,7 +12,7 @@
             android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/frag_ab_request_type"
+                android:id="@+id/login_in_company"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -35,8 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/frag_abrequest_txt_start"
-                app:layout_constraintTop_toBottomOf="@+id/frag_ab_request_type"
-                app:layout_constraintStart_toStartOf="@+id/frag_ab_request_type"
+                app:layout_constraintTop_toBottomOf="@+id/login_in_company"
+                app:layout_constraintStart_toStartOf="@+id/login_in_company"
                 android:layout_marginTop="24dp"
                 android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
                 android:hint="@string/hint_comment"
                 android:gravity="top"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/frag_abrequest_in_comment"
+                android:id="@+id/login_in_username"
                 app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_sp_stop_day"
                 app:layout_constraintStart_toStartOf="@+id/frag_abrequest_sp_stop_day"
                 app:layout_constraintEnd_toEndOf="@+id/frag_abrequest_sp_stop_type"
@@ -145,8 +145,8 @@
                 android:editable="false"
                 app:icon="@drawable/ic_attachment"
                 style="?attr/materialButtonOutlinedStyle"
-                app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_in_comment"
-                app:layout_constraintStart_toStartOf="@+id/frag_abrequest_in_comment"
+                app:layout_constraintTop_toBottomOf="@+id/login_in_username"
+                app:layout_constraintStart_toStartOf="@+id/login_in_username"
                 android:layout_marginTop="8dp" />
 
         <Button

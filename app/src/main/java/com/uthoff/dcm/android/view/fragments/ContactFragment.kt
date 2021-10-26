@@ -13,7 +13,7 @@ import com.uthoff.dcm.android.viewmodel.CompanyViewModel
 
 
 class ContactFragment : Fragment() {
-    private val viewModel: CompanyViewModel = CompanyViewModel(CompanyRepository())
+    private val viewModel: CompanyViewModel = CompanyViewModel()
 
     private lateinit var imgCompany: ImageView
     private lateinit var txtCompany: TextView

@@ -11,7 +11,8 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CompanyViewModel(private val companyRepository: CompanyRepository) : ViewModel() {
+class CompanyViewModel() : ViewModel() {
+    private val companyRepository: CompanyRepository = CompanyRepository()
     private val companyData = MutableLiveData<Company>()
     val company: LiveData<Company> = companyData
 

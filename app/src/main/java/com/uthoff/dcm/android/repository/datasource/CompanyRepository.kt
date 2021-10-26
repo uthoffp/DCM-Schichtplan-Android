@@ -10,4 +10,9 @@ class CompanyRepository {
         val apiService: ApiService = ApiService.getInstance()
         return apiService.getCompanyData(1, token)
     }
+
+    suspend fun getAllCompanies(): Response<List<Company>> {
+        val apiService: ApiService = ApiService.getInstance()
+        return apiService.getAllCompanies()
+    }
 }
