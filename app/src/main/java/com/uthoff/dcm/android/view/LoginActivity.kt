@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         spCompany = findViewById(R.id.frag_ab_request_type)
         inEmail = findViewById(R.id.frag_abrequest_in_comment)
         inPw = findViewById(R.id.login_input_pw)
-        btnLogin = findViewById(R.id.login_btn_save)
+        btnLogin = findViewById(R.id.frag_pwchange_btn_change)
 
         btnLogin.setOnClickListener { onClickLogin() }
     }

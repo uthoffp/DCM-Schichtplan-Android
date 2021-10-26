@@ -41,8 +41,6 @@ class AbRequestFragment : Fragment() {
         return view
     }
 
-
-
     @SuppressLint("ClickableViewAccessibility")
     private fun setUpUi(view: View) {
         spType = view.findViewById(R.id.frag_ab_request_type)
@@ -63,7 +61,7 @@ class AbRequestFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun onOpenDateTimePicker(type: String): View.OnTouchListener {
         return View.OnTouchListener { _, motionEvent ->
-            when (motionEvent.action){
+            when (motionEvent.action) {
                 MotionEvent.ACTION_UP -> {
                     val dateRangePicker =
                         MaterialDatePicker.Builder.datePicker()

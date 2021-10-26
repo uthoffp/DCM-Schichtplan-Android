@@ -1,10 +1,9 @@
 package com.uthoff.dcm.android.repository.model
 
-class User(
-    val id: Int,
-    val token: String,
-    val name: String,
-    val famName: String,
+data class User(
+    val company: String,
+    val familyName: String,
     val firstName: String,
-    val companyId: Int
+    val token: String,
+    val uId: String
 )

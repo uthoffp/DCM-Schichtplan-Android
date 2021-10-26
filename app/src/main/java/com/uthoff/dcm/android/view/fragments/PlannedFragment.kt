@@ -19,7 +19,9 @@ class PlannedFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_times, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_times, container, false)
+        //setUpUi(view)
+        return view
     }
 }

@@ -1,9 +1,11 @@
 package com.uthoff.dcm.android.repository.model
 
-class Company(
-    val name: String,
-    val secondName: String,    val street: String,
-    val postcode: Int,
-    val city: String,
-    val phone: Int
+data class Company(
+    val City: String,
+    val CompanyName1: String,
+    val CompanyName2: String,
+    val Phone: String,
+    val Postcode: String,
+    val Street: String,
+    val Picture: String
 )

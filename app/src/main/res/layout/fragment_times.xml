@@ -41,7 +41,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/frag_planned_input_date"
+                android:id="@+id/frag_pwchange_in_oldpw"
                 app:startIconDrawable="@drawable/ic_plan"
                 app:layout_constraintStart_toEndOf="@+id/frag_planned_fab_prev"
                 app:layout_constraintEnd_toStartOf="@+id/frag_planned_fab_next"
