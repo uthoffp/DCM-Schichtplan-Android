@@ -3,6 +3,7 @@ package com.uthoff.dcm.android.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
@@ -24,20 +25,27 @@ import com.google.gson.GsonBuilder
 import com.google.gson.Gson
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 
-
-
-
 class MainActivity : AppCompatActivity() {
+    private lateinit var topAppBar: MaterialToolbar
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val topAppBar = findViewById<MaterialToolbar>(R.id.topAppBar)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-        val navigationView = findViewById<NavigationView>(R.id.navigationView)
 
-        topAppBar.setNavigationOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
+        setUpUi()
+        setListeners()
+    }
+
+    private fun setUpUi() {
+        topAppBar = findViewById(R.id.topAppBar)
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.navigationView)
+    }
+
+    private fun setListeners() {
+        topAppBar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -55,7 +63,16 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
+    }
 
+    private fun AppCompatActivity.setFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.layout, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    fun test() {
         val gson = GsonBuilder().setLenient().create()
 
         val retrofit = Retrofit.Builder()
@@ -78,13 +95,8 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun AppCompatActivity.setFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.layout, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
-
     override fun onBackPressed() {
     }
+
+
 }

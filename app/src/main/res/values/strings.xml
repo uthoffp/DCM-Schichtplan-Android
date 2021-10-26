@@ -27,4 +27,7 @@
 
     <string name="txt_startDate">Von Datum:</string>
     <string name="txt_stopDate">Bis Datum:</string>
+    <string name="txt_goes">Geht</string>
+    <string name="txt_top10">Die letzten 10 Buchungen</string>
+    <string name="txt_comes">Kommt</string>
 </resources>
