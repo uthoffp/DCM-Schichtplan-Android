@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.uthoff.dcm.android.R
+import com.uthoff.dcm.android.repository.datasource.CompanyRepository
+import com.uthoff.dcm.android.viewmodel.CompanyViewModel
 
 
 class ContactFragment : Fragment() {
+    private val viewModel: CompanyViewModel = CompanyViewModel(CompanyRepository())
+
     private lateinit var imgCompany: ImageView
     private lateinit var txtCompany: TextView
     private lateinit var txtStreet: TextView
@@ -29,6 +33,7 @@ class ContactFragment : Fragment() {
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_contact, container, false)
         setUpUi(view)
+        setUpViewModel()
         return view
     }
 
@@ -38,5 +43,15 @@ class ContactFragment : Fragment() {
         txtStreet = view.findViewById(R.id.frag_contact_txt_street)
         txtCity = view.findViewById(R.id.frag_contact_txt_city)
         txtPhone = view.findViewById(R.id.frag_contact_txt_phone)
+    }
+
+    private fun setUpViewModel() {
+        viewModel.company.observe(viewLifecycleOwner, {
+            val cityPostCode = "${it.Postcode}, ${it.City}"
+            txtCompany.text = it.CompanyName1
+            txtCity.text = cityPostCode
+            txtStreet.text = it.Street
+            txtPhone.text  = it.Phone
+        })
     }
 }

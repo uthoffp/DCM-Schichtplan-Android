@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import com.uthoff.dcm.android.R
-import com.uthoff.dcm.android.repository.datasource.ApiRequests
+import com.uthoff.dcm.android.repository.datasource.ApiService
 import com.uthoff.dcm.android.view.fragments.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,6 +17,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.GsonBuilder
+import com.uthoff.dcm.android.repository.datasource.CompanyRepository
 
 class MainActivity : AppCompatActivity() {
     private lateinit var topAppBar: MaterialToolbar
@@ -64,29 +65,6 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.layout, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
-    }
-
-    fun test() {
-        val gson = GsonBuilder().setLenient().create()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.56.1:8080")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-        val service = retrofit.create(ApiRequests::class.java)
-        val call = service.getLandingPage()
-
-        call.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response.code() == 200) {
-                    val i: Int = 0;
-                }
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                val i: Int = 0;
-            }
-        })
     }
 
     override fun onBackPressed() {

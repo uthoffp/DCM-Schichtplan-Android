@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">DCM Schichtplan</string>
+    <string name="base_url">http://192.168.56.1:8080</string>
 
     <string name="menu_planned">Dienstplan</string>
     <string name="menu_clocking">Stempeln</string>
