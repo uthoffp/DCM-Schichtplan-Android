@@ -3,23 +3,19 @@ package com.uthoff.dcm.android.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
+import com.uthoff.dcm.android.repository.model.User
 import com.uthoff.dcm.android.R
-import com.uthoff.dcm.android.repository.datasource.ApiService
 import com.uthoff.dcm.android.view.fragments.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import com.google.gson.GsonBuilder
-import com.uthoff.dcm.android.repository.datasource.CompanyRepository
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var user: User
     private lateinit var topAppBar: MaterialToolbar
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
@@ -27,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        user = intent.extras?.get("user") as User
 
         setUpUi()
         setListeners()
@@ -36,6 +33,10 @@ class MainActivity : AppCompatActivity() {
         topAppBar = findViewById(R.id.topAppBar)
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.navigationView)
+
+        navigationView.getHeaderView(0)
+            .findViewById<TextView>(R.id.nav_header_name)
+            .text = user.fullName()
     }
 
     private fun setListeners() {

@@ -1,9 +1,15 @@
 package com.uthoff.dcm.android.repository.model
 
-data class User(
+import java.io.Serializable
+
+class User(
     val company: String,
     val familyName: String,
     val firstName: String,
     val token: String,
     val uId: String
-)
+) : Serializable {
+    fun fullName(): String {
+        return "$firstName $familyName"
+    }
+}

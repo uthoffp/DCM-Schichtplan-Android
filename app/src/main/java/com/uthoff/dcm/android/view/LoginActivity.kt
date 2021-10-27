@@ -79,7 +79,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun launchMainActivity(user: User) {
         val intent: Intent = Intent(this, MainActivity::class.java)
-        //intent.putExtra("user", user.)
+        intent.putExtra("user", user)
+        startActivity(intent)
     }
 
     private fun onClickLogin() {
