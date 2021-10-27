@@ -34,6 +34,9 @@ class LoginActivity : AppCompatActivity() {
 
         setUpUi()
         setUpViewModel()
+
+        etEmail.setText("e@mail.de")
+        etPw.setText("1234abcd")
     }
 
     private fun setUpUi() {
@@ -48,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.frag_pwchange_btn_change)
 
         btnLogin.setOnClickListener { onClickLogin() }
-        spCompany.setOnItemClickListener { _, _, posititon, _ -> btnLogin.isEnabled = true }
+        spCompany.setOnItemClickListener { _, _, _, _ -> btnLogin.isEnabled = true }
     }
 
     private fun setUpViewModel() {
@@ -78,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun launchMainActivity(user: User) {
-        val intent: Intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("user", user)
         startActivity(intent)
     }

@@ -6,12 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.uthoff.dcm.android.R
-
+import com.uthoff.dcm.android.repository.model.ClockingTimes
+import com.uthoff.dcm.android.repository.model.User
+import com.uthoff.dcm.android.viewmodel.ClockingViewModel
 
 class ClockingFragment : Fragment() {
+    private lateinit var user: User
+    private lateinit var clockingViewModel: ClockingViewModel
 
+    private lateinit var fragView: View
     private lateinit var txtDate: TextView
     private lateinit var txtTime: TextView
     private lateinit var btnComes: FloatingActionButton
@@ -20,6 +27,7 @@ class ClockingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            user = it.get("user") as User
         }
     }
 
@@ -27,26 +35,43 @@ class ClockingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_clocking, container, false)
-        setUpUi(view)
-        return view
+        fragView = inflater.inflate(R.layout.fragment_clocking, container, false)
+        setUpUi()
+        setUpViewModel()
+        return fragView
     }
 
-    private fun setUpUi(view: View) {
-        txtDate = view.findViewById(R.id.frag_clocking_txt_date)
-        txtTime = view.findViewById(R.id.frag_clocking_txt_time)
-        btnComes = view.findViewById(R.id.frag_clocking_btn_comes)
-        btnGoes = view.findViewById(R.id.frag_clocking_btn_goes)
+    private fun setUpUi() {
+        txtDate = fragView.findViewById(R.id.frag_clocking_txt_date)
+        txtTime = fragView.findViewById(R.id.frag_clocking_txt_time)
+        btnComes = fragView.findViewById(R.id.frag_clocking_btn_comes)
+        btnGoes = fragView.findViewById(R.id.frag_clocking_btn_goes)
 
-        btnComes.setOnClickListener { onClickComes() }
-        btnGoes.setOnClickListener { onCLickGoes() }
+        btnComes.setOnClickListener { clockingViewModel.clocking(1) }
+        btnGoes.setOnClickListener { clockingViewModel.clocking(2) }
     }
 
-    private fun onClickComes() {
-
+    private fun setUpViewModel() {
+        clockingViewModel = ClockingViewModel(user)
+        clockingViewModel.errorMessage.observe(viewLifecycleOwner, errorMessageObserver)
+        clockingViewModel.date.observe(viewLifecycleOwner, dateObserver)
+        clockingViewModel.time.observe(viewLifecycleOwner, timeObserver)
+        clockingViewModel.clockingTimes.observe(viewLifecycleOwner, clockingTimesObserver)
     }
 
-    private fun onCLickGoes() {
+    private val errorMessageObserver = Observer<String> {
+        Snackbar.make(fragView, it, Snackbar.LENGTH_LONG).show()
+    }
 
+    private val dateObserver = Observer<String> {
+        txtDate.text = it
+    }
+
+    private val timeObserver = Observer<String> {
+        txtTime.text = it
+    }
+
+    private val clockingTimesObserver = Observer<List<ClockingTimes>> {
+        var data: List<ClockingTimes>  = it
     }
 }

@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.google.android.material.textfield.TextInputLayout
 import com.uthoff.dcm.android.R
-
+import com.uthoff.dcm.android.repository.model.User
 
 class PasswordChangeFragment : Fragment() {
+    private lateinit var user: User
+
     private lateinit var inOldPw: TextInputLayout
     private lateinit var inNewPw: TextInputLayout
     private lateinit var inConfPw: TextInputLayout
@@ -19,6 +21,7 @@ class PasswordChangeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            user = it.get("user") as User
         }
     }
 

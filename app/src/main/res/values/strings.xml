@@ -31,4 +31,6 @@
     <string name="txt_goes">Geht</string>
     <string name="txt_top10">Die letzten 10 Buchungen</string>
     <string name="txt_comes">Kommt</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

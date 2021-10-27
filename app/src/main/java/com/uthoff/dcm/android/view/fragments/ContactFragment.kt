@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.uthoff.dcm.android.R
-import com.uthoff.dcm.android.repository.datasource.CompanyRepository
 import com.uthoff.dcm.android.viewmodel.CompanyViewModel
-
+import com.uthoff.dcm.android.repository.model.User
 
 class ContactFragment : Fragment() {
-    private val viewModel: CompanyViewModel = CompanyViewModel()
+    private lateinit var viewModel: CompanyViewModel
+    private lateinit var user: User
 
     private lateinit var imgCompany: ImageView
     private lateinit var txtCompany: TextView
@@ -24,6 +24,7 @@ class ContactFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            user = it.get("user") as User
         }
     }
 
@@ -46,12 +47,13 @@ class ContactFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
+        viewModel = CompanyViewModel(user)
         viewModel.company.observe(viewLifecycleOwner, {
             val cityPostCode = "${it.Postcode}, ${it.City}"
             txtCompany.text = it.CompanyName1
             txtCity.text = cityPostCode
             txtStreet.text = it.Street
-            txtPhone.text  = it.Phone
+            txtPhone.text = it.Phone
         })
     }
 }

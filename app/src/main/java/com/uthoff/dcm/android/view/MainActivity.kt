@@ -12,7 +12,6 @@ import com.google.android.material.navigation.NavigationView
 import com.uthoff.dcm.android.repository.model.User
 import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.view.fragments.*
-import java.io.Serializable
 
 class MainActivity : AppCompatActivity() {
     private lateinit var user: User
@@ -39,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             .text = user.fullName()
     }
 
+
     private fun setListeners() {
         topAppBar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
 
@@ -62,6 +62,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun AppCompatActivity.setFragment(fragment: Fragment) {
+        val bundle = Bundle()
+        bundle.putSerializable("user", user)
+        fragment.arguments = bundle
+
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.layout, fragment)
         transaction.addToBackStack(null)

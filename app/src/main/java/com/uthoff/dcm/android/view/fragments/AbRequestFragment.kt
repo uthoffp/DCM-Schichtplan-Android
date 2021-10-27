@@ -13,9 +13,10 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.uthoff.dcm.android.R
-
+import com.uthoff.dcm.android.repository.model.User
 
 class AbRequestFragment : Fragment() {
+    private lateinit var user: User
 
     private lateinit var spType: TextInputLayout
     private lateinit var inStartDate: TextInputEditText
@@ -29,6 +30,7 @@ class AbRequestFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            user = it.get("user") as User
         }
     }
 
