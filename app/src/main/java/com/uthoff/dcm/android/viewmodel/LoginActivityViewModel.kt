@@ -2,8 +2,6 @@ package com.uthoff.dcm.android.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.uthoff.dcm.android.repository.datasource.CompanyRepository
 import com.uthoff.dcm.android.repository.datasource.UserRepository
 import com.uthoff.dcm.android.repository.model.Company
@@ -41,12 +39,27 @@ class LoginActivityViewModel {
         }
     }
 
-    fun login(username: String, pw: String) {
+    fun login(company: String, email: String, pw: String) {
+        if (!validateInput(email, pw)) return
+        CoroutineScope(Dispatchers.IO).launch {
+            val cId: Int? = companies.value?.filter {
+                    c : Company -> c.CompanyName1 == company
+            }?.get(0)?.ID?.toInt()
 
+            if(cId != null) {
+                val result = userRepository.login(cId, email, pw)
+                    withContext(Dispatchers.Main) {
+                        if(result.isSuccessful) _user.value = result.body()!!
+                        else _errorMessage.value = "Benutzername oder Kennwort falsch."
+                    }
+            } else {
+                _errorMessage.value = "Unternehemen konnte nicht gefunden werden. Bitte versuchen sie es später erneut"
+            }
+        }
     }
 
-    fun validateInput(email: TextInputEditText, pw: TextInputEditText): Boolean {
-        if (email.text.isNullOrBlank() || pw.text.isNullOrBlank()) {
+    private fun validateInput(email: String, pw: String): Boolean {
+        if (email.isBlank() || pw.isBlank()) {
             _errorMessage.value = "Bitte füllen sie alle Felder aus."
             return false
         }
