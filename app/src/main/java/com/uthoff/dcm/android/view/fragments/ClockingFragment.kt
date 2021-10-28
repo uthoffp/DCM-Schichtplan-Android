@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.uthoff.dcm.android.R
-import com.uthoff.dcm.android.repository.model.ClockingTimes
+import com.uthoff.dcm.android.repository.model.ClockingTime
 import com.uthoff.dcm.android.repository.model.User
+import com.uthoff.dcm.android.view.adapter.ClockingTimeAdapter
 import com.uthoff.dcm.android.viewmodel.ClockingViewModel
 
 class ClockingFragment : Fragment() {
@@ -23,6 +27,7 @@ class ClockingFragment : Fragment() {
     private lateinit var txtTime: TextView
     private lateinit var btnComes: FloatingActionButton
     private lateinit var btnGoes: FloatingActionButton
+    private lateinit var recView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +51,7 @@ class ClockingFragment : Fragment() {
         txtTime = fragView.findViewById(R.id.frag_clocking_txt_time)
         btnComes = fragView.findViewById(R.id.frag_clocking_btn_comes)
         btnGoes = fragView.findViewById(R.id.frag_clocking_btn_goes)
+        recView = fragView.findViewById(R.id.frag_clocking_recview)
 
         btnComes.setOnClickListener { clockingViewModel.clocking(1) }
         btnGoes.setOnClickListener { clockingViewModel.clocking(2) }
@@ -56,7 +62,7 @@ class ClockingFragment : Fragment() {
         clockingViewModel.errorMessage.observe(viewLifecycleOwner, errorMessageObserver)
         clockingViewModel.date.observe(viewLifecycleOwner, dateObserver)
         clockingViewModel.time.observe(viewLifecycleOwner, timeObserver)
-        clockingViewModel.clockingTimes.observe(viewLifecycleOwner, clockingTimesObserver)
+        clockingViewModel.clockingTime.observe(viewLifecycleOwner, clockingTimesObserver)
     }
 
     private val errorMessageObserver = Observer<String> {
@@ -71,7 +77,10 @@ class ClockingFragment : Fragment() {
         txtTime.text = it
     }
 
-    private val clockingTimesObserver = Observer<List<ClockingTimes>> {
-        var data: List<ClockingTimes>  = it
+    private val clockingTimesObserver = Observer<List<ClockingTime>> {
+        recView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+        recView.adapter = ClockingTimeAdapter(it)
+
     }
 }

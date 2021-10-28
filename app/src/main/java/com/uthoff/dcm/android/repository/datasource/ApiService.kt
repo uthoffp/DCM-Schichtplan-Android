@@ -1,6 +1,6 @@
 package com.uthoff.dcm.android.repository.datasource
 
-import com.uthoff.dcm.android.repository.model.ClockingTimes
+import com.uthoff.dcm.android.repository.model.ClockingTime
 import com.uthoff.dcm.android.repository.model.Company
 import com.uthoff.dcm.android.repository.model.User
 import org.json.JSONObject
@@ -41,7 +41,7 @@ interface ApiService {
         @Path("cId") cId: Int,
         @Path("uId") uId: Int,
         @Header("auth") token: String
-    ): Response<List<ClockingTimes>>
+    ): Response<List<ClockingTime>>
 
     companion object {
         var apiService: ApiService? = null

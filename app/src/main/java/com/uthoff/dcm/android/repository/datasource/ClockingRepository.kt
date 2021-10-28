@@ -1,6 +1,6 @@
 package com.uthoff.dcm.android.repository.datasource
 
-import com.uthoff.dcm.android.repository.model.ClockingTimes
+import com.uthoff.dcm.android.repository.model.ClockingTime
 import com.uthoff.dcm.android.repository.model.User
 import org.json.JSONObject
 import retrofit2.Response
@@ -17,7 +17,7 @@ class ClockingRepository {
         return apiService.clocking(user.company.toInt(), user.uId.toInt(), user.token, json)
     }
 
-    suspend fun latestTimes(user: User): Response<List<ClockingTimes>> {
+    suspend fun latestTimes(user: User): Response<List<ClockingTime>> {
         val apiService: ApiService = ApiService.getInstance()
         return apiService.latestTimes(user.company.toInt(), user.uId.toInt(), user.token)
     }
