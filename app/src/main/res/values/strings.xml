@@ -21,6 +21,7 @@
     <string name="hint_comment">Bemerkung</string>
     <string name="hint_abtype">Fehlzeit Typ</string>
     <string name="hint_abcheck">Antrag prüfen</string>
+    <string name="hint_firstdayofweek">Erster Tag der Woche</string>
 
     <string name="btn_attach">Anhang Anfügen</string>
     <string name="btn_pwchange">Passwort ändern</string>
@@ -31,6 +32,12 @@
     <string name="txt_goes">Geht</string>
     <string name="txt_top10">Die letzten 10 Buchungen</string>
     <string name="txt_comes">Kommt</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_shift1">Schicht 2</string>
+    <string name="txt_shift2">Schicht 1</string>
+    <string name="txt_date">Datum</string>
+
+    <string name="dialog_clockingStatusAlert">Sie haben schon eingestempelt. Wollen Sie nochmals Einstempeln?</string>
+    <string name="decline">Abbrechen</string>
+    <string name="accept">Ja</string>
+
 </resources>

@@ -2,6 +2,7 @@ package com.uthoff.dcm.android.repository.datasource
 
 import com.uthoff.dcm.android.repository.model.Company
 import retrofit2.Response
+import java.net.SocketException
 
 class CompanyRepository {
     suspend fun getCompanyData(cId: Int, token: String): Response<Company> {

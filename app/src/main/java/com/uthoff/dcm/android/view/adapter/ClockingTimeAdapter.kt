@@ -15,7 +15,7 @@ class ClockingTimeAdapter(private val clockingTimes: List<ClockingTime>) :
     @SuppressLint("InflateParams")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClockingTimesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val inflatedView = inflater.inflate(R.layout.item_clocking_time, null)
+        val inflatedView = inflater.inflate(R.layout.item_clocking_time, parent, false)
         return ClockingTimesViewHolder(inflatedView)
     }
 

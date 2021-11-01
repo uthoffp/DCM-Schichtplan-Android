@@ -2,6 +2,7 @@ package com.uthoff.dcm.android.repository.datasource
 
 import com.uthoff.dcm.android.repository.model.ClockingTime
 import com.uthoff.dcm.android.repository.model.Company
+import com.uthoff.dcm.android.repository.model.TimeInfo
 import com.uthoff.dcm.android.repository.model.User
 import org.json.JSONObject
 import retrofit2.Response
@@ -42,6 +43,24 @@ interface ApiService {
         @Path("uId") uId: Int,
         @Header("auth") token: String
     ): Response<List<ClockingTime>>
+
+    @GET("/company/{cId}/user/{uId}/actual/")
+    suspend fun getTimeActual(
+        @Path("cId") cId: Int,
+        @Path("uId") uId: Int,
+        @Path("start") start: String,
+        @Path("end") end: String,
+        @Header("auth") token: String
+    ): Response<List<TimeInfo>>
+
+    @GET("/company/{cId}/user/{uId}/planned/{start}/{end}")
+    suspend fun getTimePlanned(
+        @Path("cId") cId: Int,
+        @Path("uId") uId: Int,
+        @Path("start") start: String,
+        @Path("end") end: String,
+        @Header("auth") token: String
+    ): Response<List<TimeInfo>>
 
     companion object {
         var apiService: ApiService? = null

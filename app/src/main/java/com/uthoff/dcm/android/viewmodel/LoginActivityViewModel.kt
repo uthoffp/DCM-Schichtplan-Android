@@ -10,6 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.net.SocketException
+import java.net.SocketTimeoutException
 
 class LoginActivityViewModel {
     private val userRepository: UserRepository = UserRepository()
@@ -25,35 +27,44 @@ class LoginActivityViewModel {
     val errorMessage: LiveData<String> = _errorMessage
 
     init {
-        getAllCompanies()
+        CoroutineScope(Dispatchers.IO).launch {
+            getAllCompanies()
+        }
     }
 
-    private fun getAllCompanies() {
-        CoroutineScope(Dispatchers.IO).launch {
+    private suspend fun getAllCompanies() {
+        try {
             val result = companyRepository.getAllCompanies()
             if (result.isSuccessful) {
                 withContext(Dispatchers.Main) {
                     _companies.value = result.body()!!
                 }
             }
+        } catch (e: SocketTimeoutException) {
+            e.printStackTrace()
+            withContext(Dispatchers.Main) {
+                _errorMessage.value = "Es konnte keine Verbindung mit dem Server hergestellt werden."
+            }
+            getAllCompanies()
         }
     }
 
     fun login(company: String, email: String, pw: String) {
         if (!validateInput(email, pw)) return
         CoroutineScope(Dispatchers.IO).launch {
-            val cId: Int? = companies.value?.filter {
-                    c : Company -> c.CompanyName1 == company
+            val cId: Int? = companies.value?.filter { c: Company ->
+                c.CompanyName1 == company
             }?.get(0)?.ID?.toInt()
 
-            if(cId != null) {
+            if (cId != null) {
                 val result = userRepository.login(cId, email, pw)
-                    withContext(Dispatchers.Main) {
-                        if(result.isSuccessful) _user.value = result.body()!!
-                        else _errorMessage.value = "Benutzername oder Kennwort falsch."
-                    }
+                withContext(Dispatchers.Main) {
+                    if (result.isSuccessful) _user.value = result.body()!!
+                    else _errorMessage.value = "Benutzername oder Kennwort falsch."
+                }
             } else {
-                _errorMessage.value = "Unternehemen konnte nicht gefunden werden. Bitte versuchen sie es später erneut"
+                _errorMessage.value =
+                    "Unternehemen konnte nicht gefunden werden. Bitte versuchen sie es später erneut"
             }
         }
     }

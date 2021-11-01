@@ -11,6 +11,8 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.uthoff.dcm.android.repository.model.User
+import kotlinx.coroutines.delay
+import java.net.SocketException
 
 class CompanyViewModel(private val user: User) : ViewModel() {
     private val companyRepository: CompanyRepository = CompanyRepository()
@@ -18,17 +20,22 @@ class CompanyViewModel(private val user: User) : ViewModel() {
     val company: LiveData<Company> = companyData
 
     init {
-        loadCompanyData()
+        CoroutineScope(IO).launch {
+            loadCompanyData()
+        }
     }
 
-    private fun loadCompanyData() {
-        CoroutineScope(IO).launch {
+    private suspend fun loadCompanyData() {
+        try {
             val result = companyRepository.getCompanyData(user.company.toInt(), user.token)
             if (result.isSuccessful) {
                 withContext(Main) {
                     companyData.value = result.body()!!
                 }
             }
+        } catch (e: SocketException) {
+            delay(10000)
+            loadCompanyData()
         }
     }
 }

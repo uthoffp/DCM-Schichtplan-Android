@@ -25,7 +25,7 @@ class Utils {
             val localDateTime: LocalDateTime = LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(date), TimeZone
                     .getDefault().toZoneId()
-            );
+            )
             val formatter = DateTimeFormatter.ofPattern("HH:mm")
             return formatter.format(localDateTime) + " Uhr"
         }
@@ -34,9 +34,16 @@ class Utils {
             val localDateTime: LocalDateTime = LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(date), TimeZone
                     .getDefault().toZoneId()
-            );
+            )
             val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
             return formatter.format(localDateTime)
+        }
+
+        fun getFirstDayOfWeek(time: Long): String {
+            val calendar: Calendar = Calendar.getInstance()
+            calendar.time = Date(time)
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+            return dateGetDateString(calendar.timeInMillis)
         }
     }
 }

@@ -35,7 +35,7 @@ class PasswordChangeFragment : Fragment() {
     }
 
     private fun setUpUi(view: View) {
-        inOldPw = view.findViewById(R.id.frag_pwchange_in_oldpw)
+        inOldPw = view.findViewById(R.id.frag_time_in_date)
         inNewPw = view.findViewById(R.id.frag_pwchange_in_newpw)
         inConfPw = view.findViewById(R.id.frag_pwchange_in_confirmpw)
         btnChange = view.findViewById(R.id.frag_pwchange_btn_change)

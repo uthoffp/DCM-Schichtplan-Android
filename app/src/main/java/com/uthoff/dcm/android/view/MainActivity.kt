@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         user = intent.extras?.get("user") as User
 
         setUpUi()
-        setListeners()
+        setUpListeners()
     }
 
     private fun setUpUi() {
@@ -38,19 +38,18 @@ class MainActivity : AppCompatActivity() {
             .text = user.fullName()
     }
 
-
-    private fun setListeners() {
+    private fun setUpListeners() {
         topAppBar.setNavigationOnClickListener { drawerLayout.openDrawer(GravityCompat.START) }
 
-        setFragment(PlannedFragment())
+        setFragment(TimeFragment(), "planned")
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.abrequest -> setFragment(AbRequestFragment())
-                R.id.actual -> setFragment(ActualFragment())
-                R.id.clocking -> setFragment(ClockingFragment())
-                R.id.contact -> setFragment(ContactFragment())
-                R.id.pwchange -> setFragment(PasswordChangeFragment())
-                R.id.planned -> setFragment(PlannedFragment())
+                R.id.planned -> setFragment(TimeFragment(), "planned")
+                R.id.clocking -> setFragment(ClockingFragment(), null)
+                R.id.abrequest -> setFragment(AbRequestFragment(), null)
+                R.id.actual -> setFragment(TimeFragment(), "actual")
+                R.id.contact -> setFragment(TimeFragment(), null)
+                R.id.pwchange -> setFragment(PasswordChangeFragment(), null)
                 R.id.logout -> startActivity(Intent(this, LoginActivity::class.java))
             }
 
@@ -61,9 +60,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun AppCompatActivity.setFragment(fragment: Fragment) {
+    private fun AppCompatActivity.setFragment(fragment: Fragment, type: String?) {
         val bundle = Bundle()
         bundle.putSerializable("user", user)
+        if(type != null) bundle.putString("timeType", type)
         fragment.arguments = bundle
 
         val transaction = supportFragmentManager.beginTransaction()
@@ -72,6 +72,5 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    override fun onBackPressed() {
-    }
+    override fun onBackPressed() {}
 }

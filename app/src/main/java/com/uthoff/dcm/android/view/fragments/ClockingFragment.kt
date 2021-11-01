@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.uthoff.dcm.android.R
@@ -53,8 +54,22 @@ class ClockingFragment : Fragment() {
         btnGoes = fragView.findViewById(R.id.frag_clocking_btn_goes)
         recView = fragView.findViewById(R.id.frag_clocking_recview)
 
-        btnComes.setOnClickListener { clockingViewModel.clocking(1) }
-        btnGoes.setOnClickListener { clockingViewModel.clocking(2) }
+        btnComes.setOnClickListener { clocking(1) }
+        btnGoes.setOnClickListener { clocking(2) }
+    }
+
+    private fun clocking(status: Int) {
+        if(!clockingViewModel.latestStatusEquals(status)) {
+            clockingViewModel.clocking(status)
+        } else {
+            MaterialAlertDialogBuilder(requireContext())
+                .setMessage(resources.getString(R.string.dialog_clockingStatusAlert))
+                .setNegativeButton(resources.getString(R.string.decline), null)
+                .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+                    clockingViewModel.clocking(status)
+                }
+                .show()
+        }
     }
 
     private fun setUpViewModel() {

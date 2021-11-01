@@ -51,14 +51,18 @@ class ClockingViewModel(private val user: User) : ViewModel() {
         }
     }
 
+    fun latestStatusEquals(status: Int): Boolean {
+        val latest: Int? = clockingTime.value?.last()?.E_Status
+        return latest == status
+    }
+
     private fun getLatestTimes() {
         CoroutineScope(IO).launch {
             val result = clockingRepository.latestTimes(user)
             withContext(Main) {
                 if (result.isSuccessful) {
                     _clockingTimes.value = processClockingTimes(result.body()!!)
-                } else _errorMessage.value =
-                    "Bei der Datenabfrage ist ein Fehler aufgetreten."
+                } else _errorMessage.value = "Bei der Datenabfrage ist ein Fehler aufgetreten."
             }
         }
     }
@@ -68,9 +72,11 @@ class ClockingViewModel(private val user: User) : ViewModel() {
             it.E_Date = Utils.dateGetDateString(it.E_Date)
             it.E_Time += " Uhr"
 
-            if(it.E_Status == 1) it.E_StatusText = "Kommt"
+            if (it.E_Status == 1) it.E_StatusText = "Kommt"
             else it.E_StatusText = "Geht"
         }
         return clockingTimes
     }
+
+
 }
