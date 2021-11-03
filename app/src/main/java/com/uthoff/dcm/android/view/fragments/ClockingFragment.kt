@@ -58,6 +58,15 @@ class ClockingFragment : Fragment() {
         btnGoes.setOnClickListener { clocking(2) }
     }
 
+    private fun setUpViewModel() {
+        clockingViewModel = ClockingViewModel(user)
+
+        clockingViewModel.errorMessage.observe(viewLifecycleOwner, errorMessageObserver)
+        clockingViewModel.date.observe(viewLifecycleOwner, dateObserver)
+        clockingViewModel.time.observe(viewLifecycleOwner, timeObserver)
+        clockingViewModel.clockingTime.observe(viewLifecycleOwner, clockingTimesObserver)
+    }
+
     private fun clocking(status: Int) {
         if(!clockingViewModel.latestStatusEquals(status)) {
             clockingViewModel.clocking(status)
@@ -70,14 +79,6 @@ class ClockingFragment : Fragment() {
                 }
                 .show()
         }
-    }
-
-    private fun setUpViewModel() {
-        clockingViewModel = ClockingViewModel(user)
-        clockingViewModel.errorMessage.observe(viewLifecycleOwner, errorMessageObserver)
-        clockingViewModel.date.observe(viewLifecycleOwner, dateObserver)
-        clockingViewModel.time.observe(viewLifecycleOwner, timeObserver)
-        clockingViewModel.clockingTime.observe(viewLifecycleOwner, clockingTimesObserver)
     }
 
     private val errorMessageObserver = Observer<String> {
@@ -96,6 +97,5 @@ class ClockingFragment : Fragment() {
         recView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         recView.adapter = ClockingTimeAdapter(it)
-
     }
 }

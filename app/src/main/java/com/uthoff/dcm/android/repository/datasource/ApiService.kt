@@ -44,8 +44,8 @@ interface ApiService {
         @Header("auth") token: String
     ): Response<List<ClockingTime>>
 
-    @GET("/company/{cId}/user/{uId}/actual/")
-    suspend fun getTimeActual(
+    @GET("/company/{cId}/user/{uId}/actual/{start}/{end}")
+    suspend fun timeActual(
         @Path("cId") cId: Int,
         @Path("uId") uId: Int,
         @Path("start") start: String,
@@ -54,7 +54,7 @@ interface ApiService {
     ): Response<List<TimeInfo>>
 
     @GET("/company/{cId}/user/{uId}/planned/{start}/{end}")
-    suspend fun getTimePlanned(
+    suspend fun timePlanned(
         @Path("cId") cId: Int,
         @Path("uId") uId: Int,
         @Path("start") start: String,
