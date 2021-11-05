@@ -59,7 +59,12 @@ class TimeViewModel(private val user: User, private val timeType: String) : View
             val end: String = Utils.enDateString(calendar.timeInMillis)
             calendar.add(Calendar.DATE, -6)
 
-            val result = timeRepository.timeActual(user, start, end)
+            val result = if (timeType == "planned") {
+                timeRepository.timePlanned(user, start, end)
+            } else {
+                timeRepository.timeActual(user, start, end)
+            }
+
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful) {
                     _times.value = result.body()

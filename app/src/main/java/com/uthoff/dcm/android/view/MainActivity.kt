@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.clocking -> setFragment(ClockingFragment(), null)
                 R.id.abrequest -> setFragment(AbRequestFragment(), null)
                 R.id.actual -> setFragment(TimeFragment(), "actual")
-                R.id.contact -> setFragment(TimeFragment(), null)
+                R.id.contact -> setFragment(ContactFragment(), null)
                 R.id.pwchange -> setFragment(PasswordChangeFragment(), null)
                 R.id.logout -> startActivity(Intent(this, LoginActivity::class.java))
             }

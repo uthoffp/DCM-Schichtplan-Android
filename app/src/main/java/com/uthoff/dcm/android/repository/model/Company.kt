@@ -8,5 +8,5 @@ data class Company(
     val Phone: String,
     val Postcode: String,
     val Street: String,
-    val Picture: String
+    val Picture: Any
 )

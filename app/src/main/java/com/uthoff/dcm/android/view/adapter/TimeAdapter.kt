@@ -10,9 +10,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.model.TimeInfo
+import com.uthoff.dcm.android.viewmodel.TimeViewModel
 import com.uthoff.dcm.android.viewmodel.Utils
 
-class TimeAdapter(private val timeInfos: List<TimeInfo>) :
+class TimeAdapter(private val timeInfos: List<TimeInfo>, viewModel: TimeViewModel) :
     RecyclerView.Adapter<TimeAdapter.TimeViewHolder>() {
 
     @SuppressLint("InflateParams")

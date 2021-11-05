@@ -20,9 +20,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.model.TimeInfo
-import com.uthoff.dcm.android.viewmodel.Utils
 import com.uthoff.dcm.android.repository.model.User
-import com.uthoff.dcm.android.view.adapter.ClockingTimeAdapter
 import com.uthoff.dcm.android.view.adapter.TimeAdapter
 import com.uthoff.dcm.android.viewmodel.TimeViewModel
 
@@ -101,7 +99,7 @@ class TimeFragment : Fragment() {
     }
 
     private val timeObserver = Observer<List<TimeInfo>> {
-        recView.adapter = TimeAdapter(it)
+        recView.adapter = TimeAdapter(it, timeViewModel)
     }
 
     @SuppressLint("ClickableViewAccessibility")
