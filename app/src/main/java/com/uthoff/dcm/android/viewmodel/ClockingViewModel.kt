@@ -28,9 +28,6 @@ class ClockingViewModel(private val user: User) : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
-    private val _loading = MutableLiveData<Boolean>()
-    val loading: LiveData<Boolean> = _loading
-
     init {
         getLatestTimes()
         getDate()

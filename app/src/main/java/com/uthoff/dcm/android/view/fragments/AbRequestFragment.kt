@@ -14,9 +14,11 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.model.User
+import com.uthoff.dcm.android.viewmodel.AbRequestViewModel
 
 class AbRequestFragment : Fragment() {
     private lateinit var user: User
+    private lateinit var viewModel: AbRequestViewModel
 
     private lateinit var spType: TextInputLayout
     private lateinit var inStartDate: TextInputEditText
@@ -40,6 +42,7 @@ class AbRequestFragment : Fragment() {
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_abrequest, container, false)
         setUpUi(view)
+        setUpViewModel()
         return view
     }
 
@@ -58,6 +61,17 @@ class AbRequestFragment : Fragment() {
         inStartDate.setOnTouchListener(onOpenDateTimePicker("start"))
         inStopDate.inputType = InputType.TYPE_NULL
         inStopDate.setOnTouchListener(onOpenDateTimePicker("stop"))
+
+        btnCheck.setOnClickListener { onClickCheck() }
+    }
+
+    private fun setUpViewModel() {
+        viewModel = AbRequestViewModel(user)
+    }
+
+    private fun onClickCheck() {
+        val abRequestBottomSheet = AbRequestBottomSheet(viewModel)
+        abRequestBottomSheet.show(childFragmentManager, "AbRequestBottomSheet")
     }
 
     @SuppressLint("ClickableViewAccessibility")

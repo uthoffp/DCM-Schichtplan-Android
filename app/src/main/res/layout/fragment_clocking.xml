@@ -39,7 +39,7 @@
                     app:layout_constraintHorizontal_bias="0.8" />
 
             <View
-                    android:id="@+id/frag_clocking_devider"
+                    android:id="@+id/btmsht_abrequest_devider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?android:attr/dividerVertical"
@@ -57,7 +57,7 @@
                     android:clickable="true"
                     app:borderWidth="0dp"
                     android:id="@+id/frag_clocking_btn_comes"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_clocking_devider"
+                    app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_devider"
                     app:layout_constraintStart_toStartOf="@+id/frag_clocking_txt_date"
                     app:layout_constraintEnd_toEndOf="@+id/frag_clocking_txt_date"
                     android:layout_marginTop="16dp"
@@ -72,7 +72,7 @@
                     android:clickable="true"
                     app:borderWidth="0dp"
                     android:id="@+id/frag_clocking_btn_goes"
-                    app:layout_constraintTop_toBottomOf="@+id/frag_clocking_devider"
+                    app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_devider"
                     app:layout_constraintStart_toStartOf="@+id/frag_clocking_txt_time"
                     app:layout_constraintEnd_toEndOf="@+id/frag_clocking_txt_time"
                     android:layout_marginTop="16dp"

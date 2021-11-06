@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+        <TextView
+                android:text="@string/txt_holiday_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_head"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="16dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        <View
+                android:id="@+id/btmsht_abrequest_devider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/dividerVertical"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_head"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp" />
+
+        <TextView
+                android:text="@string/txt_holiday_prevyear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_prevyear"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_devider"
+                android:layout_marginTop="16dp" />
+
+        <TextView
+                android:text="0,0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_val_prevyear"
+                app:layout_constraintTop_toTopOf="@+id/btmsht_abrequest_txt_prevyear"
+                app:layout_constraintBottom_toBottomOf="@+id/btmsht_abrequest_txt_prevyear"
+                app:layout_constraintStart_toEndOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+                android:text="@string/txt_holiday_thisyear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_thisyear"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_prevyear"
+                android:layout_marginTop="8dp" />
+
+        <TextView
+                android:text="0,0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_val_thisyear"
+                app:layout_constraintTop_toTopOf="@+id/btmsht_abrequest_txt_thisyear"
+                app:layout_constraintBottom_toBottomOf="@+id/btmsht_abrequest_txt_thisyear"
+                app:layout_constraintStart_toEndOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+                android:text="@string/txt_holiday_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_total"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_thisyear" />
+
+        <TextView
+                android:text="0,0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_val_total"
+                app:layout_constraintTop_toTopOf="@+id/btmsht_abrequest_txt_total"
+                app:layout_constraintBottom_toBottomOf="@+id/btmsht_abrequest_txt_total"
+                app:layout_constraintStart_toEndOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:textStyle="bold" />
+
+        <TextView
+                android:text="@string/txt_holiday_corrections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_corrctions"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_total"
+                android:layout_marginTop="16dp" />
+
+        <TextView
+                android:text="0,0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_val_corrctions"
+                app:layout_constraintTop_toTopOf="@+id/btmsht_abrequest_txt_corrctions"
+                app:layout_constraintBottom_toBottomOf="@+id/btmsht_abrequest_txt_corrctions"
+                app:layout_constraintStart_toEndOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+                android:text="@string/txt_holiday_taken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_taken"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_corrctions"
+                android:layout_marginTop="8dp" />
+
+        <TextView
+                android:text="0,0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_val_taken"
+                app:layout_constraintTop_toTopOf="@+id/btmsht_abrequest_txt_taken"
+                app:layout_constraintBottom_toBottomOf="@+id/btmsht_abrequest_txt_taken"
+                app:layout_constraintStart_toEndOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+                android:text="@string/txt_holiday_open"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_open"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginTop="8dp" />
+
+        <TextView
+                android:text="0,0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_val_open"
+                app:layout_constraintTop_toTopOf="@+id/btmsht_abrequest_txt_open"
+                app:layout_constraintBottom_toBottomOf="@+id/btmsht_abrequest_txt_open"
+                app:layout_constraintStart_toEndOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:textStyle="bold" />
+
+        <TextView
+                android:text="@string/txt_holiday_request"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_request"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_open"
+                android:layout_marginTop="16dp" />
+
+        <TextView
+                android:text="0,0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_val_request"
+                app:layout_constraintTop_toTopOf="@+id/btmsht_abrequest_txt_request"
+                app:layout_constraintBottom_toBottomOf="@+id/btmsht_abrequest_txt_request"
+                app:layout_constraintStart_toEndOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+                android:text="@string/txt_holiday_remaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_remaining"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_request"
+                android:layout_marginTop="8dp" />
+
+        <TextView
+                android:text="0,0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_val_remaining"
+                app:layout_constraintTop_toTopOf="@+id/btmsht_abrequest_txt_remaining"
+                app:layout_constraintBottom_toBottomOf="@+id/btmsht_abrequest_txt_remaining"
+                app:layout_constraintStart_toEndOf="@+id/btmsht_abrequest_txt_taken"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:textStyle="bold" />
+
+        <TextView
+                android:text="@string/txt_holiday_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_txt_result"
+                app:layout_constraintStart_toStartOf="@+id/btmsht_abrequest_txt_remaining"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_remaining"
+                android:layout_marginTop="32dp" />
+
+        <Button
+                android:text="@string/btn_sendRequest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btmsht_abrequest_btn_send"
+                app:layout_constraintTop_toBottomOf="@+id/btmsht_abrequest_txt_result"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                style="@style/Widget.MaterialComponents.Button"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
