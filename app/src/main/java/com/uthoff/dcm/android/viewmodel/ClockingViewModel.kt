@@ -52,7 +52,7 @@ class ClockingViewModel(private val user: User) : ViewModel() {
     }
 
     fun latestStatusEquals(status: Int): Boolean {
-        val latest: Int? = clockingTime.value?.last()?.E_Status
+        val latest = clockingTime.value?.first()?.E_Status
         return latest == status
     }
 

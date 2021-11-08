@@ -62,6 +62,12 @@ interface ApiService {
         @Header("auth") token: String
     ): Response<List<TimeInfo>>
 
+    @GET("/company/{cId}/specialtime/")
+    suspend fun specialTime(
+        @Path("cId") cId: Int,
+        @Header("auth") token: String
+    )
+
     companion object {
         var apiService: ApiService? = null
         fun getInstance(): ApiService {
@@ -75,6 +81,5 @@ interface ApiService {
             }
             return apiService!!
         }
-
     }
 }

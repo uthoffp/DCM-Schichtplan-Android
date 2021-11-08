@@ -10,6 +10,8 @@
     <string name="menu_pwchange">Passwort ändern</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_footer">© 2021 - DCM-App - Customer In Focus</string>
+    <string name="menu_licences">Lizenzen</string>
+    <string name="menu_web">Web-Version</string>
 
     <string name="hint_oldpw">Altes Passwort</string>
     <string name="hint_pwconfirm">Passwort wiederholen</string>
@@ -50,5 +52,4 @@
     <string name="dialog_clockingStatusAlert">Sie haben schon eingestempelt. Wollen Sie nochmals Einstempeln?</string>
     <string name="decline">Abbrechen</string>
     <string name="accept">Ja</string>
-
 </resources>

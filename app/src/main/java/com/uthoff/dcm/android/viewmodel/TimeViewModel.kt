@@ -37,6 +37,7 @@ class TimeViewModel(private val user: User, private val timeType: String) : View
     fun setDate(time: Long) {
         calendar.timeInMillis = Utils.getFirstDayOfWeek(time)
         _date.value = Utils.dateGetDateString(calendar.timeInMillis)
+        getTimes()
     }
 
     fun nextWeek() {
@@ -74,5 +75,31 @@ class TimeViewModel(private val user: User, private val timeType: String) : View
                 _isLoading.value = false
             }
         }
+    }
+
+    fun getShift1Dep(timeInfo: TimeInfo): String {
+        val station: String? = timeInfo.Station1
+        var department: String? = timeInfo.DivDepartmentsSt1
+
+        if(department == null || department.isBlank()) department = timeInfo.Department
+
+        return when {
+            department == null -> ""
+            station == null -> department
+            else -> "$department ($station)"
+        }.filter { !it.isWhitespace() }
+    }
+
+    fun getShift2Dep(timeInfo: TimeInfo): String {
+        val station: String? = timeInfo.Station2
+        var department: String? = timeInfo.DivDepartmentsSt2
+
+        if(department == null || department.isBlank()) department = timeInfo.Department
+
+        return when {
+            department == null -> ""
+            station == null -> department
+            else -> "$department ($station)"
+        }.filter { !it.isWhitespace() }
     }
 }

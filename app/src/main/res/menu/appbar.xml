@@ -3,11 +3,11 @@
     <item
             android:id="@+id/web"
             android:icon="@drawable/ic_more"
-            android:title="Web-Version" />
+            android:title="@string/menu_web" />
 
     <item
             android:id="@+id/licences"
             android:icon="@drawable/ic_more"
-            android:title="Lizenzen" />
+            android:title="@string/menu_licences" />
 
 </menu>

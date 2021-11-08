@@ -13,7 +13,7 @@ import com.uthoff.dcm.android.repository.model.TimeInfo
 import com.uthoff.dcm.android.viewmodel.TimeViewModel
 import com.uthoff.dcm.android.viewmodel.Utils
 
-class TimeAdapter(private val timeInfos: List<TimeInfo>, viewModel: TimeViewModel) :
+class TimeAdapter(private val timeInfos: List<TimeInfo>, private val viewModel: TimeViewModel) :
     RecyclerView.Adapter<TimeAdapter.TimeViewHolder>() {
 
     @SuppressLint("InflateParams")
@@ -24,7 +24,7 @@ class TimeAdapter(private val timeInfos: List<TimeInfo>, viewModel: TimeViewMode
     }
 
     override fun onBindViewHolder(holder: TimeViewHolder, position: Int) {
-        holder.bindInfoTimes(timeInfos[position], position % 2 == 0)
+        holder.bindInfoTimes(timeInfos[position], viewModel, position % 2 == 0)
     }
 
     override fun getItemCount(): Int = timeInfos.size
@@ -38,15 +38,16 @@ class TimeAdapter(private val timeInfos: List<TimeInfo>, viewModel: TimeViewMode
         private var txtShift2Dep: TextView = v.findViewById(R.id.item_time_shift2_dep)
 
         @SuppressLint("SetTextI18n")
-        fun bindInfoTimes(timeInfo: TimeInfo, bgChange: Boolean) {
+        fun bindInfoTimes(timeInfo: TimeInfo, viewModel: TimeViewModel, bgChange: Boolean) {
             txtDate.text = Utils.dayDateString(timeInfo.DATE)
-            if (timeInfo.StartTime1 != null) txtShift1Time.text =
-                "${timeInfo.StartTime1} - ${timeInfo.EndTime1}"
-            if (timeInfo.StartTime1 != null) txtShift2Time.text =
-                "${timeInfo.StartTime2} - ${timeInfo.EndTime2}"
-            txtShift1Dep.text = timeInfo.DivDepartmentsSt1 as CharSequence?
-            txtShift2Dep.text = timeInfo.DivDepartmentsSt2 as CharSequence?
-
+            if (timeInfo.StartTime1 != null && timeInfo.StartTime1.isNotBlank()){
+                txtShift1Time.text = "${timeInfo.StartTime1} - ${timeInfo.EndTime1}"
+                txtShift1Dep.text = viewModel.getShift1Dep(timeInfo)
+            }
+            if (timeInfo.StartTime1 != null && timeInfo.StartTime1.isNotBlank()) {
+                txtShift2Time.text = "${timeInfo.StartTime2} - ${timeInfo.EndTime2}"
+                txtShift2Dep.text = viewModel.getShift2Dep(timeInfo)
+            }
             setBgColor(bgChange)
         }
 
