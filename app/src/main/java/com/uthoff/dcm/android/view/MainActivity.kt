@@ -1,12 +1,15 @@
 package com.uthoff.dcm.android.view
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.google.android.gms.oss.licenses.OssLicensesActivity
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import com.uthoff.dcm.android.repository.model.User
@@ -58,12 +61,28 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
+
+        topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.web -> {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(
+                        "https://cif24.de/login?customer=47110815"))
+                    startActivity(browserIntent)
+                    true
+                }
+                R.id.licences -> {
+                    startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun AppCompatActivity.setFragment(fragment: Fragment, type: String?) {
         val bundle = Bundle()
         bundle.putSerializable("user", user)
-        if(type != null) bundle.putString("timeType", type)
+        if (type != null) bundle.putString("timeType", type)
         fragment.arguments = bundle
 
         val transaction = supportFragmentManager.beginTransaction()

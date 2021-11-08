@@ -1,11 +1,14 @@
 package com.uthoff.dcm.android.view
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.Observer
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -19,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private val loginViewModel: LoginActivityViewModel = LoginActivityViewModel()
 
     private lateinit var view: View
+    private lateinit var topAppBar: MaterialToolbar
     private lateinit var loadingBar: LinearProgressIndicator
     private lateinit var inCompany: TextInputLayout
     private lateinit var spCompany: AutoCompleteTextView
@@ -41,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setUpUi() {
         view = findViewById(R.id.login_view)
+        topAppBar = findViewById(R.id.topAppBar)
         loadingBar = findViewById(R.id.login_loading)
         inCompany = findViewById(R.id.login_in_company)
         spCompany = findViewById(R.id.login_sp_company)
@@ -52,6 +57,22 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener { onClickLogin() }
         spCompany.setOnItemClickListener { _, _, _, _ -> btnLogin.isEnabled = true }
+
+        topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.web -> {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(
+                        "https://cif24.de/login?customer=47110815"))
+                    startActivity(browserIntent)
+                    true
+                }
+                R.id.licences -> {
+                    startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setUpViewModel() {

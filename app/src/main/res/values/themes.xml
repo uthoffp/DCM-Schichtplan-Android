@@ -17,11 +17,7 @@
         <item name="snackbarStyle">@style/MySnackbar</item>
     </style>
 
-    <style name="TextViewStyle" parent="android:Widget.TextView">
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="MySnackbar" parent="Widget.MaterialComponents.Snackbar">
-        <item name="android:layout_margin">16dp</item>
+    <style name="ThemeOverlay.App.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
     </style>
 </resources>
