@@ -35,8 +35,6 @@ class AbRequestFragment : Fragment() {
     private lateinit var user: User
     private lateinit var viewModel: AbRequestViewModel
 
-    private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
-
     private lateinit var fragView: View
     private lateinit var spType: TextInputLayout
     private lateinit var inStartDate: TextInputEditText
@@ -54,13 +52,6 @@ class AbRequestFragment : Fragment() {
         arguments?.let {
             user = it.get("user") as User
         }
-
-        cameraLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val data: Intent? = result.data
-                }
-            }
     }
 
     override fun onCreateView(
@@ -122,8 +113,15 @@ class AbRequestFragment : Fragment() {
     }
 
     private fun onClickCheck() {
-        val abRequestBottomSheet = AbRequestBottomSheet(viewModel)
-        abRequestBottomSheet.show(childFragmentManager, "AbRequestBottomSheet")
+        if (viewModel.validateUserInput(
+                spType.editText?.text.toString(),
+                inComment.editText?.text.toString()
+            )
+        ) {
+            val abRequestBottomSheet = AbRequestBottomSheet(viewModel)
+            abRequestBottomSheet.show(childFragmentManager, "AbRequestBottomSheet")
+        }
+
     }
 
     private fun onClickAttach() {
@@ -142,12 +140,18 @@ class AbRequestFragment : Fragment() {
                             .build()
                     dateRangePicker.addOnPositiveButtonClickListener {
                         when (type) {
-                            "start" -> inStartDate.setText(dateRangePicker.selection?.let { it1 ->
-                                Utils.dateGetDateString(it1)
-                            })
-                            "stop" -> inStopDate.setText(dateRangePicker.selection?.let { it1 ->
-                                Utils.dateGetDateString(it1)
-                            })
+                            "start" -> {
+                                inStartDate.setText(dateRangePicker.selection?.let { it1 ->
+                                    Utils.dateGetDateString(it1)
+                                })
+                                viewModel.start = it
+                            }
+                            "stop" -> {
+                                inStopDate.setText(dateRangePicker.selection?.let { it1 ->
+                                    Utils.dateGetDateString(it1)
+                                })
+                                viewModel.stop = it
+                            }
                         }
                     }
                     dateRangePicker.show(childFragmentManager, "startDate")
