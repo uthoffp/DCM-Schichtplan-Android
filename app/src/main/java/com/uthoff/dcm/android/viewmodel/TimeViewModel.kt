@@ -56,9 +56,9 @@ class TimeViewModel(private val user: User, private val timeType: String) : View
         _isLoading.value = true
         CoroutineScope(Dispatchers.IO).launch {
             val start: String = Utils.enDateString(calendar.timeInMillis)
-            calendar.add(Calendar.DATE, 6)
+            calendar.add(Calendar.DATE, 13)
             val end: String = Utils.enDateString(calendar.timeInMillis)
-            calendar.add(Calendar.DATE, -6)
+            calendar.add(Calendar.DATE, -13)
 
             val result = if (timeType == "planned") {
                 timeRepository.timePlanned(user, start, end)

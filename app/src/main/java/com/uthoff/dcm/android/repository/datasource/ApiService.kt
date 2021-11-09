@@ -1,9 +1,6 @@
 package com.uthoff.dcm.android.repository.datasource
 
-import com.uthoff.dcm.android.repository.model.ClockingTime
-import com.uthoff.dcm.android.repository.model.Company
-import com.uthoff.dcm.android.repository.model.TimeInfo
-import com.uthoff.dcm.android.repository.model.User
+import com.uthoff.dcm.android.repository.model.*
 import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -66,7 +63,7 @@ interface ApiService {
     suspend fun specialTime(
         @Path("cId") cId: Int,
         @Header("auth") token: String
-    )
+    ): Response<List<SpecialTime>>
 
     companion object {
         var apiService: ApiService? = null

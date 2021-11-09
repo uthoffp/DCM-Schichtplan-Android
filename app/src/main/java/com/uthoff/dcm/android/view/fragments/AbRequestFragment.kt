@@ -1,6 +1,7 @@
 package com.uthoff.dcm.android.view.fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.text.InputType
 import androidx.fragment.app.Fragment
@@ -16,15 +17,34 @@ import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.model.User
 import com.uthoff.dcm.android.viewmodel.AbRequestViewModel
 
+import android.content.Intent
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.text.HtmlCompat
+import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
+import com.uthoff.dcm.android.view.dialogs.AbRequestBottomSheet
+import com.uthoff.dcm.android.view.dialogs.PictureSelectBottomSheet
+import com.uthoff.dcm.android.viewmodel.Utils
+import java.util.*
+
+
 class AbRequestFragment : Fragment() {
     private lateinit var user: User
     private lateinit var viewModel: AbRequestViewModel
 
+    private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
+
+    private lateinit var fragView: View
     private lateinit var spType: TextInputLayout
     private lateinit var inStartDate: TextInputEditText
-    private lateinit var spStartType: TextInputLayout
+    private lateinit var inStartType: TextInputLayout
+    private lateinit var spStartType: AutoCompleteTextView
     private lateinit var inStopDate: TextInputEditText
-    private lateinit var spStopType: TextInputLayout
+    private lateinit var spStopType: AutoCompleteTextView
+    private lateinit var inStopType: TextInputLayout
     private lateinit var inComment: TextInputLayout
     private lateinit var btnAttach: Button
     private lateinit var btnCheck: Button
@@ -34,44 +54,81 @@ class AbRequestFragment : Fragment() {
         arguments?.let {
             user = it.get("user") as User
         }
+
+        cameraLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data: Intent? = result.data
+                }
+            }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_abrequest, container, false)
-        setUpUi(view)
+        fragView = inflater.inflate(R.layout.fragment_abrequest, container, false)
+        setUpUi()
         setUpViewModel()
-        return view
+        return fragView
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setUpUi(view: View) {
-        spType = view.findViewById(R.id.login_in_company)
-        inStartDate = view.findViewById(R.id.frag_anrequest_et_start_day)
-        spStartType = view.findViewById(R.id.frag_anrequest_sp_start_type)
-        inStopDate = view.findViewById(R.id.frag_anrequest_et_stop_day)
-        spStopType = view.findViewById(R.id.frag_abrequest_sp_stop_type)
-        inComment = view.findViewById(R.id.login_in_username)
-        btnAttach = view.findViewById(R.id.frag_abrequest_btn_attach)
-        btnCheck = view.findViewById(R.id.frag_abrequest_btn_check)
+    private fun setUpUi() {
+        spType = fragView.findViewById(R.id.frag_anrequest_sp_type)
+        inStartDate = fragView.findViewById(R.id.frag_anrequest_et_start_day)
+        inStartType = fragView.findViewById(R.id.frag_anrequest_et_start_type)
+        spStartType = fragView.findViewById(R.id.frag_anrequest_sp_start_type)
+        inStopDate = fragView.findViewById(R.id.frag_anrequest_et_stop_day)
+        inStopType = fragView.findViewById(R.id.frag_abrequest_et_stop_type)
+        spStopType = fragView.findViewById(R.id.frag_abrequest_sp_stop_type)
+        inComment = fragView.findViewById(R.id.login_in_username)
+        btnAttach = fragView.findViewById(R.id.frag_abrequest_btn_attach)
+        btnCheck = fragView.findViewById(R.id.frag_abrequest_btn_check)
 
         inStartDate.inputType = InputType.TYPE_NULL
         inStartDate.setOnTouchListener(onOpenDateTimePicker("start"))
         inStopDate.inputType = InputType.TYPE_NULL
         inStopDate.setOnTouchListener(onOpenDateTimePicker("stop"))
+        inStartDate.setText(Utils.dateGetDateString(Date().time))
+        inStopDate.setText(Utils.dateGetDateString(Date().time))
+
+        val dayTypes = listOf(
+            getString(R.string.menu_day_full),
+            HtmlCompat.fromHtml(getString(R.string.menu_day_half), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        )
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, dayTypes)
+        spStartType.setAdapter(adapter)
+        spStopType.setAdapter(adapter)
 
         btnCheck.setOnClickListener { onClickCheck() }
+        btnAttach.setOnClickListener { onClickAttach() }
     }
 
     private fun setUpViewModel() {
         viewModel = AbRequestViewModel(user)
+        viewModel.abTypes.observe(viewLifecycleOwner, abTypeObserver)
+        viewModel.errorMessage.observe(viewLifecycleOwner, errorMessageObserver)
+
+    }
+
+    private val abTypeObserver = Observer<List<String>> {
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, it)
+        (spType.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+    }
+
+    private val errorMessageObserver = Observer<String> {
+        Snackbar.make(fragView, it, Snackbar.LENGTH_LONG).show()
     }
 
     private fun onClickCheck() {
         val abRequestBottomSheet = AbRequestBottomSheet(viewModel)
         abRequestBottomSheet.show(childFragmentManager, "AbRequestBottomSheet")
+    }
+
+    private fun onClickAttach() {
+        val abRequestBottomSheet = PictureSelectBottomSheet(viewModel)
+        abRequestBottomSheet.show(childFragmentManager, "PictureSelectBottomSheet")
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -85,8 +142,12 @@ class AbRequestFragment : Fragment() {
                             .build()
                     dateRangePicker.addOnPositiveButtonClickListener {
                         when (type) {
-                            "start" -> inStartDate.setText(dateRangePicker.selection.toString())
-                            "stop" -> inStopDate.setText(dateRangePicker.selection.toString())
+                            "start" -> inStartDate.setText(dateRangePicker.selection?.let { it1 ->
+                                Utils.dateGetDateString(it1)
+                            })
+                            "stop" -> inStopDate.setText(dateRangePicker.selection?.let { it1 ->
+                                Utils.dateGetDateString(it1)
+                            })
                         }
                     }
                     dateRangePicker.show(childFragmentManager, "startDate")

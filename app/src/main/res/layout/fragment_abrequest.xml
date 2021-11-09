@@ -12,7 +12,7 @@
             android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/login_in_company"
+                android:id="@+id/frag_anrequest_sp_type"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -35,8 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/frag_abrequest_txt_start"
-                app:layout_constraintTop_toBottomOf="@+id/login_in_company"
-                app:layout_constraintStart_toStartOf="@+id/login_in_company"
+                app:layout_constraintTop_toBottomOf="@+id/frag_anrequest_sp_type"
+                app:layout_constraintStart_toStartOf="@+id/frag_anrequest_sp_type"
                 android:layout_marginTop="24dp"
                 android:textStyle="bold" />
 
@@ -48,7 +48,7 @@
                 app:startIconDrawable="@drawable/ic_plan"
                 app:layout_constraintStart_toStartOf="@+id/frag_abrequest_txt_start"
                 app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_txt_start"
-                app:layout_constraintEnd_toStartOf="@+id/frag_anrequest_sp_start_type"
+                app:layout_constraintEnd_toStartOf="@+id/frag_anrequest_et_start_type"
                 android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -59,7 +59,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/frag_anrequest_sp_start_type"
+                android:id="@+id/frag_anrequest_et_start_type"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -68,9 +68,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_txt_start">
 
             <AutoCompleteTextView
+                    android:id="@+id/frag_anrequest_sp_start_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" 1 Tag"
+                    android:text="@string/menu_day_full"
                     android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +93,7 @@
                 app:startIconDrawable="@drawable/ic_plan"
                 app:layout_constraintStart_toStartOf="@+id/frag_abrequest_txt_stop"
                 app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_txt_stop"
-                app:layout_constraintEnd_toStartOf="@+id/frag_abrequest_sp_stop_type"
+                app:layout_constraintEnd_toStartOf="@+id/frag_abrequest_et_stop_type"
                 android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -104,7 +105,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/frag_abrequest_sp_stop_type"
+                android:id="@+id/frag_abrequest_et_stop_type"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -113,9 +114,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_txt_stop">
 
             <AutoCompleteTextView
+                    android:id="@+id/frag_abrequest_sp_stop_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" 1 Tag"
+                    android:text="@string/menu_day_full"
                     android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,7 +130,7 @@
                 android:id="@+id/login_in_username"
                 app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_sp_stop_day"
                 app:layout_constraintStart_toStartOf="@+id/frag_abrequest_sp_stop_day"
-                app:layout_constraintEnd_toEndOf="@+id/frag_abrequest_sp_stop_type"
+                app:layout_constraintEnd_toEndOf="@+id/frag_abrequest_et_stop_type"
                 android:layout_marginTop="24dp">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -156,7 +158,7 @@
                 style="@style/Widget.MaterialComponents.Button"
                 android:text="@string/hint_abcheck"
                 app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_btn_attach"
-                app:layout_constraintEnd_toEndOf="@+id/frag_abrequest_sp_stop_type"
+                app:layout_constraintEnd_toEndOf="@+id/frag_abrequest_et_stop_type"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"

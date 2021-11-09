@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         view = findViewById(R.id.login_view)
         topAppBar = findViewById(R.id.topAppBar)
         loadingBar = findViewById(R.id.login_loading)
-        inCompany = findViewById(R.id.login_in_company)
+        inCompany = findViewById(R.id.frag_anrequest_sp_type)
         spCompany = findViewById(R.id.login_sp_company)
         inEmail = findViewById(R.id.login_in_username)
         etEmail = findViewById(R.id.login_et_username)
