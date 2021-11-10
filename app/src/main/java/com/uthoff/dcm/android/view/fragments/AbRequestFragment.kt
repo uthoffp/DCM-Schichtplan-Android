@@ -1,7 +1,6 @@
 package com.uthoff.dcm.android.view.fragments
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Bundle
 import android.text.InputType
 import androidx.fragment.app.Fragment
@@ -17,17 +16,15 @@ import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.model.User
 import com.uthoff.dcm.android.viewmodel.AbRequestViewModel
 
-import android.content.Intent
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.uthoff.dcm.android.view.dialogs.AbRequestBottomSheet
 import com.uthoff.dcm.android.view.dialogs.PictureSelectBottomSheet
-import com.uthoff.dcm.android.viewmodel.Utils
+import com.uthoff.dcm.android.viewmodel.DateFormatter
 import java.util.*
 
 
@@ -45,6 +42,7 @@ class AbRequestFragment : Fragment() {
     private lateinit var inStopType: TextInputLayout
     private lateinit var inComment: TextInputLayout
     private lateinit var btnAttach: Button
+    private lateinit var txtRemove: TextView
     private lateinit var btnCheck: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,14 +73,15 @@ class AbRequestFragment : Fragment() {
         spStopType = fragView.findViewById(R.id.frag_abrequest_sp_stop_type)
         inComment = fragView.findViewById(R.id.login_in_username)
         btnAttach = fragView.findViewById(R.id.frag_abrequest_btn_attach)
+        txtRemove = fragView.findViewById(R.id.frag_abrequest_txt_remove)
         btnCheck = fragView.findViewById(R.id.frag_abrequest_btn_check)
 
         inStartDate.inputType = InputType.TYPE_NULL
         inStartDate.setOnTouchListener(onOpenDateTimePicker("start"))
         inStopDate.inputType = InputType.TYPE_NULL
         inStopDate.setOnTouchListener(onOpenDateTimePicker("stop"))
-        inStartDate.setText(Utils.dateGetDateString(Date().time))
-        inStopDate.setText(Utils.dateGetDateString(Date().time))
+        inStartDate.setText(DateFormatter.dateGetDateString(Date().time))
+        inStopDate.setText(DateFormatter.dateGetDateString(Date().time))
 
         val dayTypes = listOf(
             getString(R.string.menu_day_full),
@@ -92,6 +91,7 @@ class AbRequestFragment : Fragment() {
         spStartType.setAdapter(adapter)
         spStopType.setAdapter(adapter)
 
+        txtRemove.setOnClickListener { viewModel.setImage(null) }
         btnCheck.setOnClickListener { onClickCheck() }
         btnAttach.setOnClickListener { onClickAttach() }
     }
@@ -99,7 +99,8 @@ class AbRequestFragment : Fragment() {
     private fun setUpViewModel() {
         viewModel = AbRequestViewModel(user)
         viewModel.abTypes.observe(viewLifecycleOwner, abTypeObserver)
-        viewModel.errorMessage.observe(viewLifecycleOwner, errorMessageObserver)
+        viewModel.message.observe(viewLifecycleOwner, messageObserver)
+        viewModel.image.observe(viewLifecycleOwner, imageObserver)
 
     }
 
@@ -108,8 +109,19 @@ class AbRequestFragment : Fragment() {
         (spType.editText as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
-    private val errorMessageObserver = Observer<String> {
+    private val messageObserver = Observer<String> {
         Snackbar.make(fragView, it, Snackbar.LENGTH_LONG).show()
+    }
+
+    private val imageObserver = Observer<Any> {
+        if (it != null) {
+            btnAttach.text = getString(R.string.btn_attach_change)
+            txtRemove.visibility = View.VISIBLE
+            Snackbar.make(fragView, "Anhang erfolgreich angefügt", Snackbar.LENGTH_SHORT).show()
+        } else {
+            btnAttach.text = getString(R.string.btn_attach)
+            txtRemove.visibility = View.INVISIBLE
+        }
     }
 
     private fun onClickCheck() {
@@ -142,13 +154,13 @@ class AbRequestFragment : Fragment() {
                         when (type) {
                             "start" -> {
                                 inStartDate.setText(dateRangePicker.selection?.let { it1 ->
-                                    Utils.dateGetDateString(it1)
+                                    DateFormatter.dateGetDateString(it1)
                                 })
                                 viewModel.start = it
                             }
                             "stop" -> {
                                 inStopDate.setText(dateRangePicker.selection?.let { it1 ->
-                                    Utils.dateGetDateString(it1)
+                                    DateFormatter.dateGetDateString(it1)
                                 })
                                 viewModel.stop = it
                             }

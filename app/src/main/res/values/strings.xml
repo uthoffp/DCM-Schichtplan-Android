@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">DCM Schichtplan</string>
     <string name="base_url">http://192.168.56.1:8080</string>
+    <string name="company">Hotel in Focus</string>
+    <string name="customer_nr">Kundennr.: 47110815</string>
 
     <string name="menu_planned">Dienstplan</string>
     <string name="menu_clocking">Stempeln</string>
@@ -54,4 +56,7 @@
     <string name="dialog_clockingStatusAlert">Sie haben schon eingestempelt. Wollen Sie nochmals Einstempeln?</string>
     <string name="decline">Abbrechen</string>
     <string name="accept">Ja</string>
+    <string name="btn_attach_change">Anhang ändern</string>
+    <string name="btn_remove_attachment">Anhang entfernen</string>
+    <string name="txt_company">Betriebsstätte</string>
 </resources>

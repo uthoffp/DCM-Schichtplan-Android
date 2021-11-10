@@ -33,7 +33,7 @@ class PictureSelectBottomSheet(private val viewModel: AbRequestViewModel) :
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val intent: Intent? = result.data
-                    viewModel.image = intent?.extras
+                    viewModel.setImage(intent?.extras)
                     dismiss()
                 }
             }

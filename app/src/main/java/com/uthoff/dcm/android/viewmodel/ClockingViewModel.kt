@@ -35,8 +35,8 @@ class ClockingViewModel(private val user: User) : ViewModel() {
 
     private fun getDate() {
         val date = Date().time
-        _date.value = Utils.dateGetDateString(date)
-        _time.value = Utils.dateGetTimeString(date)
+        _date.value = DateFormatter.dateGetDateString(date)
+        _time.value = DateFormatter.dateGetTimeString(date)
     }
 
     fun clocking(status: Int) {
@@ -69,7 +69,7 @@ class ClockingViewModel(private val user: User) : ViewModel() {
 
     private fun processClockingTimes(clockingTimes: List<ClockingTime>): List<ClockingTime> {
         clockingTimes.forEach {
-            it.E_Date = Utils.dateGetDateString(it.E_Date)
+            it.E_Date = DateFormatter.dateGetDateString(it.E_Date)
             it.E_Time += " Uhr"
 
             if (it.E_Status == 1) it.E_StatusText = "Kommt"

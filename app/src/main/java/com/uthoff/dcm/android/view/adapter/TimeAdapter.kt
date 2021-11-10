@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.model.TimeInfo
 import com.uthoff.dcm.android.viewmodel.TimeViewModel
-import com.uthoff.dcm.android.viewmodel.Utils
+import com.uthoff.dcm.android.viewmodel.DateFormatter
 
 class TimeAdapter(private val timeInfos: List<TimeInfo>, private val viewModel: TimeViewModel) :
     RecyclerView.Adapter<TimeAdapter.TimeViewHolder>() {
@@ -39,7 +38,7 @@ class TimeAdapter(private val timeInfos: List<TimeInfo>, private val viewModel: 
 
         @SuppressLint("SetTextI18n")
         fun bindInfoTimes(timeInfo: TimeInfo, viewModel: TimeViewModel, bgChange: Boolean) {
-            txtDate.text = Utils.dayDateString(timeInfo.DATE)
+            txtDate.text = DateFormatter.dayDateString(timeInfo.DATE)
             if (timeInfo.StartTime1 != null && timeInfo.StartTime1.isNotBlank()){
                 txtShift1Time.text = "${timeInfo.StartTime1} - ${timeInfo.EndTime1}"
                 txtShift1Dep.text = viewModel.getShift1Dep(timeInfo)

@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class Utils {
+class DateFormatter {
     companion object {
         @SuppressLint("SimpleDateFormat")
         fun dateGetTimeString(date: String): String {

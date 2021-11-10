@@ -35,29 +35,29 @@ class TimeViewModel(private val user: User, private val timeType: String) : View
     }
 
     fun setDate(time: Long) {
-        calendar.timeInMillis = Utils.getFirstDayOfWeek(time)
-        _date.value = Utils.dateGetDateString(calendar.timeInMillis)
+        calendar.timeInMillis = DateFormatter.getFirstDayOfWeek(time)
+        _date.value = DateFormatter.dateGetDateString(calendar.timeInMillis)
         getTimes()
     }
 
     fun nextWeek() {
         calendar.add(Calendar.DATE, 7)
-        _date.value = Utils.dateGetDateString(calendar.timeInMillis)
+        _date.value = DateFormatter.dateGetDateString(calendar.timeInMillis)
         getTimes()
     }
 
     fun prevWeek() {
         calendar.add(Calendar.DATE, -7)
-        _date.value = Utils.dateGetDateString(calendar.timeInMillis)
+        _date.value = DateFormatter.dateGetDateString(calendar.timeInMillis)
         getTimes()
     }
 
     private fun getTimes() {
         _isLoading.value = true
         CoroutineScope(Dispatchers.IO).launch {
-            val start: String = Utils.enDateString(calendar.timeInMillis)
+            val start: String = DateFormatter.enDateString(calendar.timeInMillis)
             calendar.add(Calendar.DATE, 13)
-            val end: String = Utils.enDateString(calendar.timeInMillis)
+            val end: String = DateFormatter.enDateString(calendar.timeInMillis)
             calendar.add(Calendar.DATE, -13)
 
             val result = if (timeType == "planned") {
