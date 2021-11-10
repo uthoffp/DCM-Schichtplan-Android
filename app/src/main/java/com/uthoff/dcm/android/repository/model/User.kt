@@ -7,7 +7,8 @@ class User(
     val familyName: String,
     val firstName: String,
     val token: String,
-    val uId: String
+    val uId: String,
+    val department: String?
 ) : Serializable {
     fun fullName(): String {
         return "$firstName $familyName"

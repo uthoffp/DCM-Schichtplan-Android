@@ -26,13 +26,15 @@
     <string name="hint_username">Benutzername</string>
     <string name="hint_comment">Bemerkung</string>
     <string name="hint_abtype">Fehlzeit Typ</string>
-    <string name="hint_abcheck">Antrag prüfen</string>
+    <string name="btn_abcheck">Antrag prüfen</string>
     <string name="hint_firstdayofweek">Erster Tag der Woche</string>
 
     <string name="btn_attach">Anhang Anfügen</string>
     <string name="btn_pwchange">Passwort ändern</string>
     <string name="btn_login">Anmelden</string>
     <string name="btn_sendRequest">Antrag Stellen</string>
+    <string name="btn_attach_change">Anhang ändern</string>
+    <string name="btn_remove_attachment">Anhang entfernen</string>
 
     <string name="txt_startDate">Von Datum:</string>
     <string name="txt_stopDate">Bis Datum:</string>
@@ -42,7 +44,7 @@
     <string name="txt_shift1">Schicht 2</string>
     <string name="txt_shift2">Schicht 1</string>
     <string name="txt_date">Datum</string>
-    <string name="txt_holiday_head">Verbleibende Urlaubstage:</string>
+    <string name="txt_holiday_head">Verbleibende Urlaubstage</string>
     <string name="txt_holiday_prevyear">Aus Vorjahr:</string>
     <string name="txt_holiday_thisyear">Dieses Jahr:</string>
     <string name="txt_holiday_total">Gesamt Anspruch:</string>
@@ -52,11 +54,11 @@
     <string name="txt_holiday_request">Dieser Antrag:</string>
     <string name="txt_holiday_result">Im gewünschtem Zeitraum können Sie gerne Urlaub beantragen.</string>
     <string name="txt_holiday_remaining">Verbleibend:</string>
+    <string name="txt_company">Betriebsstätte</string>
 
     <string name="dialog_clockingStatusAlert">Sie haben schon eingestempelt. Wollen Sie nochmals Einstempeln?</string>
     <string name="decline">Abbrechen</string>
     <string name="accept">Ja</string>
-    <string name="btn_attach_change">Anhang ändern</string>
-    <string name="btn_remove_attachment">Anhang entfernen</string>
-    <string name="txt_company">Betriebsstätte</string>
+    <string name="dialog_sendRequest">Fehlzeiten Antrag jetzt senden?</string>
+
 </resources>

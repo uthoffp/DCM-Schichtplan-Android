@@ -8,4 +8,8 @@ data class SpecialTime(
     val Red: Int,
     val ShortName: String,
     val TypeKey: Int
-)
+) {
+    override fun toString(): String {
+        return Name
+    }
+}

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.*
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -16,12 +16,11 @@ import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.model.User
 import com.uthoff.dcm.android.viewmodel.AbRequestViewModel
 
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.Observer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.uthoff.dcm.android.repository.model.SpecialTime
 import com.uthoff.dcm.android.view.dialogs.AbRequestBottomSheet
 import com.uthoff.dcm.android.view.dialogs.PictureSelectBottomSheet
 import com.uthoff.dcm.android.viewmodel.DateFormatter
@@ -101,12 +100,16 @@ class AbRequestFragment : Fragment() {
         viewModel.abTypes.observe(viewLifecycleOwner, abTypeObserver)
         viewModel.message.observe(viewLifecycleOwner, messageObserver)
         viewModel.image.observe(viewLifecycleOwner, imageObserver)
-
     }
 
-    private val abTypeObserver = Observer<List<String>> {
+    private val abTypeObserver = Observer<List<SpecialTime>> {
         val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, it)
         (spType.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+
+        (spType.editText as? AutoCompleteTextView)?.setOnItemClickListener {_, _, position, _ ->
+            if(it[position].DaysInAdvance == 0) btnCheck.text = getString(R.string.btn_sendRequest)
+            else btnCheck.text = getString(R.string.btn_abcheck)
+        }
     }
 
     private val messageObserver = Observer<String> {
@@ -117,7 +120,7 @@ class AbRequestFragment : Fragment() {
         if (it != null) {
             btnAttach.text = getString(R.string.btn_attach_change)
             txtRemove.visibility = View.VISIBLE
-            Snackbar.make(fragView, "Anhang erfolgreich angefügt", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(fragView, "Anhang erfolgreich angefügt.", Snackbar.LENGTH_SHORT).show()
         } else {
             btnAttach.text = getString(R.string.btn_attach)
             txtRemove.visibility = View.INVISIBLE
@@ -125,15 +128,25 @@ class AbRequestFragment : Fragment() {
     }
 
     private fun onClickCheck() {
-        if (viewModel.validateUserInput(
-                spType.editText?.text.toString(),
-                inComment.editText?.text.toString()
-            )
-        ) {
-            val abRequestBottomSheet = AbRequestBottomSheet(viewModel)
-            abRequestBottomSheet.show(childFragmentManager, "AbRequestBottomSheet")
-        }
+        val type: String = spType.editText?.text.toString()
+        val comment: String = inComment.editText?.text.toString()
+        val startType = viewModel.dayTypeToKey(inStartType.editText?.text.toString(), requireContext())
+        val stopType = viewModel.dayTypeToKey(inStopType.editText?.text.toString(), requireContext())
 
+        if (viewModel.validateUserInput(type, startType, stopType, comment)) {
+            if(viewModel.isDirectSend()) {
+                MaterialAlertDialogBuilder(requireContext())
+                    .setMessage(resources.getString(R.string.dialog_sendRequest))
+                    .setNegativeButton(resources.getString(R.string.decline), null)
+                    .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+                        viewModel.sendRequest()
+                    }
+                    .show()
+            } else {
+                val abRequestBottomSheet = AbRequestBottomSheet(viewModel)
+                abRequestBottomSheet.show(childFragmentManager, "AbRequestBottomSheet")
+            }
+        }
     }
 
     private fun onClickAttach() {

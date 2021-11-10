@@ -65,6 +65,30 @@ interface ApiService {
         @Header("auth") token: String
     ): Response<List<SpecialTime>>
 
+    @GET("/company/{cId}/user/{uId}/holiday/planned/{year}")
+    suspend fun holidayPlanned(
+        @Path("cId") cId: Int,
+        @Path("uId") uId: Int,
+        @Path("year") year: Int,
+        @Header("auth") token: String
+    ): Response<Double>
+
+    @GET("/company/{cId}/user/{uId}/holiday/actual/{year}")
+    suspend fun holidayActual(
+        @Path("cId") cId: Int,
+        @Path("uId") uId: Int,
+        @Path("year") year: Int,
+        @Header("auth") token: String
+    ): Response<Double>
+
+    @POST("/company/{cId}/user/{uId}/abrequest")
+    suspend fun abrequest(
+        @Path("cId") cId: Int,
+        @Path("uId") uId: Int,
+        @Header("auth") token: String,
+        @Body body: JSONObject
+    ): Response<Void>
+
     companion object {
         var apiService: ApiService? = null
         fun getInstance(): ApiService {

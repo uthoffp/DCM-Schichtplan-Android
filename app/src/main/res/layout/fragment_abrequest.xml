@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.Button"
-                android:text="@string/hint_abcheck"
+                android:text="@string/btn_abcheck"
                 app:layout_constraintTop_toBottomOf="@+id/frag_abrequest_btn_attach"
                 app:layout_constraintEnd_toEndOf="@+id/frag_abrequest_et_stop_type"
                 android:layout_marginEnd="8dp"

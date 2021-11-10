@@ -29,7 +29,7 @@ class PictureSelectBottomSheet(private val viewModel: AbRequestViewModel) :
         v = inflater.inflate(R.layout.bottomsheet_picture_select, container, false)
         setUpUi()
 
-        sourceLauncher=
+        sourceLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val intent: Intent? = result.data

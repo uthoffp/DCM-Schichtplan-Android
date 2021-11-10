@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.uthoff.dcm.android.R
@@ -56,14 +57,22 @@ class AbRequestBottomSheet(private val viewModel: AbRequestViewModel) : BottomSh
         viewModel.isValid.observe(viewLifecycleOwner, isValidObserver)
     }
 
-    private var checkResultObserver = Observer<Map<String, Double>> {
-
+    private var checkResultObserver = Observer<Map<String, Double?>> {
+        txtPrevYear.text = it["prevYear"].toString()
+        txtThisYear.text = it["thisYear"].toString()
+        txtTotal.text = it["total"].toString()
+        txtCorrections.text = it["correction"].toString()
+        txtTaken.text = it["taken"].toString()
+        txtOpen.text = it["open"].toString()
+        txtThisRequest.text = it["thisRequest"].toString()
+        txtRemaining.text = it["remaining"].toString()
     }
 
     private var isValidObserver = Observer<Boolean> {
         if(!it) {
             txtResultText.text = "Im gewünschten Zeitraum können sie leider keinen Urlaub beantragen."
-            btnSend.visibility = View.INVISIBLE
+            txtResultText.setTextColor(ContextCompat.getColor(requireContext(), R.color.red_500))
+            btnSend.visibility = View.GONE
         }
     }
 
