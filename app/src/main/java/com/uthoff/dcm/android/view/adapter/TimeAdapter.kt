@@ -23,13 +23,12 @@ class TimeAdapter(private val timeInfos: List<TimeInfo>, private val viewModel: 
     }
 
     override fun onBindViewHolder(holder: TimeViewHolder, position: Int) {
-        holder.bindInfoTimes(timeInfos[position], viewModel, position % 2 == 0)
+        holder.bindInfoTimes(timeInfos[position], viewModel)
     }
 
     override fun getItemCount(): Int = timeInfos.size
 
     class TimeViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        private var itemLayout: ConstraintLayout = v.findViewById(R.id.item_time_layout)
         private var txtDate: TextView = v.findViewById(R.id.item_time_date)
         private var txtShift1Time: TextView = v.findViewById(R.id.item_time_shift1_time)
         private var txtShift2Time: TextView = v.findViewById(R.id.item_time_shift2_time)
@@ -37,21 +36,16 @@ class TimeAdapter(private val timeInfos: List<TimeInfo>, private val viewModel: 
         private var txtShift2Dep: TextView = v.findViewById(R.id.item_time_shift2_dep)
 
         @SuppressLint("SetTextI18n")
-        fun bindInfoTimes(timeInfo: TimeInfo, viewModel: TimeViewModel, bgChange: Boolean) {
+        fun bindInfoTimes(timeInfo: TimeInfo, viewModel: TimeViewModel) {
             txtDate.text = DateFormatter.dayDateString(timeInfo.DATE)
             if (timeInfo.StartTime1 != null && timeInfo.StartTime1.isNotBlank()){
                 txtShift1Time.text = "${timeInfo.StartTime1} - ${timeInfo.EndTime1}"
                 txtShift1Dep.text = viewModel.getShift1Dep(timeInfo)
             }
-            if (timeInfo.StartTime1 != null && timeInfo.StartTime1.isNotBlank()) {
+            if (timeInfo.StartTime2 != null && timeInfo.StartTime2.isNotBlank()) {
                 txtShift2Time.text = "${timeInfo.StartTime2} - ${timeInfo.EndTime2}"
                 txtShift2Dep.text = viewModel.getShift2Dep(timeInfo)
             }
-            setBgColor(bgChange)
-        }
-
-        private fun setBgColor(bgChange: Boolean) {
-            //TODO switch bg color
         }
     }
 }
