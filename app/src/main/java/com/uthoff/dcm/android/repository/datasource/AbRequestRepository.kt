@@ -1,5 +1,6 @@
 package com.uthoff.dcm.android.repository.datasource
 
+import com.uthoff.dcm.android.repository.model.RequestDays
 import com.uthoff.dcm.android.repository.model.SpecialTime
 import com.uthoff.dcm.android.repository.model.User
 import org.json.JSONObject
@@ -42,5 +43,10 @@ class AbRequestRepository {
         //json.put("attachment", attachment)
         json.put("username", user.fullName())
         return apiService.abrequest(user.company.toInt(), user.uId.toInt(), user.token, json)
+    }
+
+    suspend fun getHolidays(user: User, start: String, stop: String):Response<RequestDays> {
+        val apiService: ApiService = ApiService.getInstance()
+        return apiService.holiday(user.company.toInt(), user.uId.toInt(), start, stop, user.token )
     }
 }

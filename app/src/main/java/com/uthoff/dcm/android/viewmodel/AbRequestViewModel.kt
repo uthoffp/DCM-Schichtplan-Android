@@ -1,12 +1,12 @@
 package com.uthoff.dcm.android.viewmodel
 
 import android.content.Context
-import android.icu.util.TimeUnit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.uthoff.dcm.android.R
 import com.uthoff.dcm.android.repository.datasource.AbRequestRepository
+import com.uthoff.dcm.android.repository.model.RequestDays
 import com.uthoff.dcm.android.repository.model.SpecialTime
 import com.uthoff.dcm.android.repository.model.User
 import kotlinx.coroutines.CoroutineScope
@@ -34,8 +34,8 @@ class AbRequestViewModel(private val user: User) : ViewModel() {
     private val _image = MutableLiveData<Any>()
     val image: LiveData<Any> = _image
 
-    private val _checkResult = MutableLiveData<Map<String, Double?>>()
-    val checkResult: LiveData<Map<String, Double?>> = _checkResult
+    private val _requestDays = MutableLiveData<RequestDays>()
+    val requestDays: LiveData<RequestDays> = _requestDays
 
     private val _isValid = MutableLiveData<Boolean>()
     val isValid: LiveData<Boolean> = _isValid
@@ -96,54 +96,39 @@ class AbRequestViewModel(private val user: User) : ViewModel() {
 
     private fun checkAbRequest() {
         CoroutineScope(Dispatchers.IO).launch {
-            val year = Calendar.getInstance().get(Calendar.YEAR)
-            val startDate = Date(start)
-            val stopDate = Date(stop)
-            val requestDays: Long = java.util.concurrent.TimeUnit.DAYS.convert(
-                stopDate.time - startDate.time,
-                java.util.concurrent.TimeUnit.MILLISECONDS
-            ) + 1
+            val result = abRequestRepository.getHolidays(
+                user,
+                DateFormatter.enDateString(start),
+                DateFormatter.enDateString(stop)
+            )
 
-            val holidayPlanned = abRequestRepository.holidayPlanned(user, year)
-            val holidayActual = abRequestRepository.holidayActual(user, year)
-
-            if (holidayPlanned.isSuccessful && holidayPlanned.isSuccessful) {
-                withContext(Dispatchers.Main) {
-                    val taken = holidayPlanned.body()!! + holidayActual.body()!!
-                    val open = 25.0 - taken
-                    val remaining = open - requestDays
-                    _checkResult.value = mapOf(
-                        "prevYear" to 0.0,
-                        "thisYear" to 25.0,
-                        "correction" to 0.0,
-                        "total" to 25.0 + 0.0,
-                        "taken" to taken,
-                        "open" to 25.0 - taken,
-                        "thisRequest" to requestDays.toDouble() * -1,
-                        "remaining" to remaining
-                    )
-                    _isValid.value = remaining >= 0
+            withContext(Dispatchers.Main) {
+                if (result.isSuccessful) {
+                    _requestDays.value = result.body();
+                } else {
+                    _message.value =
+                        "Beim Abfragen der Urlaubsdaten ist ein Fehler aufgetreten. Bitte vversuchen sie es später erneut."
                 }
             }
         }
     }
 
-    fun sendRequest() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = abRequestRepository.postAbRequest(
-                user,
-                DateFormatter.enDateString(start),
-                firstDayHalf,
-                DateFormatter.enDateString(stop),
-                lastDayHalf,
-                comment,
-                _image.value
-            )
-            withContext(Dispatchers.Main) {
-                if (!result.isSuccessful) _message.value =
-                    "Beim senden des Fehlzeitantrags ist ein Fehler aufgetreten."
-                else _message.value = "Der Antrag wurde erfolgreich übermittelt."
+        fun sendRequest() {
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = abRequestRepository.postAbRequest(
+                    user,
+                    DateFormatter.enDateString(start),
+                    firstDayHalf,
+                    DateFormatter.enDateString(stop),
+                    lastDayHalf,
+                    comment,
+                    _image.value
+                )
+                withContext(Dispatchers.Main) {
+                    if (!result.isSuccessful) _message.value =
+                        "Beim senden des Fehlzeitantrags ist ein Fehler aufgetreten."
+                    else _message.value = "Der Antrag wurde erfolgreich übermittelt."
+                }
             }
         }
     }
-}

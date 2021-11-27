@@ -89,6 +89,15 @@ interface ApiService {
         @Body body: JSONObject
     ): Response<Void>
 
+    @GET("/company/{cId}/user/{uId}/holiday/{start}/{end}")
+    suspend fun holiday(
+        @Path("cId") cId: Int,
+        @Path("uId") uId: Int,
+        @Path("start") start: String,
+        @Path("end") end: String,
+        @Header("auth") token: String
+    ): Response<RequestDays>
+
     companion object {
         var apiService: ApiService? = null
         fun getInstance(): ApiService {

@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.uthoff.dcm.android.R
+import com.uthoff.dcm.android.repository.model.RequestDays
 import com.uthoff.dcm.android.viewmodel.AbRequestViewModel
 
 class AbRequestBottomSheet(private val viewModel: AbRequestViewModel) : BottomSheetDialogFragment() {
@@ -53,19 +54,19 @@ class AbRequestBottomSheet(private val viewModel: AbRequestViewModel) : BottomSh
     }
 
     private fun setUpViewModel() {
-        viewModel.checkResult.observe(viewLifecycleOwner, checkResultObserver)
+        viewModel.requestDays.observe(viewLifecycleOwner, checkResultObserver)
         viewModel.isValid.observe(viewLifecycleOwner, isValidObserver)
     }
 
-    private var checkResultObserver = Observer<Map<String, Double?>> {
-        txtPrevYear.text = it["prevYear"].toString()
-        txtThisYear.text = it["thisYear"].toString()
-        txtTotal.text = it["total"].toString()
-        txtCorrections.text = it["correction"].toString()
-        txtTaken.text = it["taken"].toString()
-        txtOpen.text = it["open"].toString()
-        txtThisRequest.text = it["thisRequest"].toString()
-        txtRemaining.text = it["remaining"].toString()
+    private var checkResultObserver = Observer<RequestDays> {
+        txtPrevYear.text = it.prevYear.toString()
+        txtThisYear.text = it.thisYear.toString()
+        txtTotal.text = it.total.toString()
+        txtCorrections.text = it.corrections.toString()
+        txtTaken.text = it.taken.toString()
+        txtOpen.text = it.open.toString()
+        txtThisRequest.text = it.thisRequest.toString()
+        txtRemaining.text = it.remaining.toString()
     }
 
     private var isValidObserver = Observer<Boolean> {
