@@ -86,49 +86,50 @@ class AbRequestViewModel(private val user: User) : ViewModel() {
     }
 
     fun dayTypeToKey(dayType: String, context: Context): Int {
-        if (dayType == context.getString(R.string.menu_day_half)) return 1
-        return 0
+        if (dayType == context.getString(R.string.menu_day_full)) return 0
+        return 1
     }
 
     fun isDirectSend(): Boolean {
         return type?.DaysInAdvance == 0
     }
 
-    private fun checkAbRequest() {
+    fun checkAbRequest() {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = abRequestRepository.getHolidays(
-                user,
-                DateFormatter.enDateString(start),
-                DateFormatter.enDateString(stop)
-            )
+            val strStart = DateFormatter.enDateString(start)
+            val strStop = DateFormatter.enDateString(stop)
+            val result = abRequestRepository.getHolidays(user, strStart, strStop)
 
             withContext(Dispatchers.Main) {
                 if (result.isSuccessful) {
-                    _requestDays.value = result.body();
+                    val req: RequestDays = result.body()!!
+                    if (firstDayHalf == 1) req.thisRequest += 0.5
+                    if (lastDayHalf == 1 && req.thisRequest <= -1) req.thisRequest += 0.5
+                    _requestDays.value = req
                 } else {
                     _message.value =
-                        "Beim Abfragen der Urlaubsdaten ist ein Fehler aufgetreten. Bitte vversuchen sie es später erneut."
+                        "Beim Abfragen der Urlaubsdaten ist ein Fehler aufgetreten. Bitte versuchen sie es später erneut."
                 }
             }
         }
     }
 
-        fun sendRequest() {
-            CoroutineScope(Dispatchers.IO).launch {
-                val result = abRequestRepository.postAbRequest(
-                    user,
-                    DateFormatter.enDateString(start),
-                    firstDayHalf,
-                    DateFormatter.enDateString(stop),
-                    lastDayHalf,
-                    comment,
-                    _image.value
-                )
-                withContext(Dispatchers.Main) {
-                    if (!result.isSuccessful) _message.value =
-                        "Beim senden des Fehlzeitantrags ist ein Fehler aufgetreten."
-                    else _message.value = "Der Antrag wurde erfolgreich übermittelt."
-                }
+    fun sendRequest() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = abRequestRepository.postAbRequest(
+                user,
+                DateFormatter.enDateString(start),
+                firstDayHalf,
+                DateFormatter.enDateString(stop),
+                lastDayHalf,
+                comment,
+                _image.value
+            )
+            withContext(Dispatchers.Main) {
+                if (!result.isSuccessful) _message.value =
+                    "Beim senden des Fehlzeitantrags ist ein Fehler aufgetreten."
+                else _message.value = "Der Antrag wurde erfolgreich übermittelt."
             }
         }
     }
+}

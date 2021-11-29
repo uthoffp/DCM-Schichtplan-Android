@@ -40,7 +40,7 @@ class LoginActivityViewModel {
                     _companies.value = result.body()!!
                 }
             }
-        } catch (e: SocketTimeoutException) {
+        } catch (e: Exception) {
             e.printStackTrace()
             withContext(Dispatchers.Main) {
                 _errorMessage.value = "Es konnte keine Verbindung mit dem Server hergestellt werden."

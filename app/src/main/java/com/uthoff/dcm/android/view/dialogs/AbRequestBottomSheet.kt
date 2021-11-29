@@ -67,6 +67,7 @@ class AbRequestBottomSheet(private val viewModel: AbRequestViewModel) : BottomSh
         txtOpen.text = it.open.toString()
         txtThisRequest.text = it.thisRequest.toString()
         txtRemaining.text = it.remaining.toString()
+
     }
 
     private var isValidObserver = Observer<Boolean> {

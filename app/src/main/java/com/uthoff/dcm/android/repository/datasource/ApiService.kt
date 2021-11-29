@@ -65,22 +65,6 @@ interface ApiService {
         @Header("auth") token: String
     ): Response<List<SpecialTime>>
 
-    @GET("/company/{cId}/user/{uId}/holiday/planned/{year}")
-    suspend fun holidayPlanned(
-        @Path("cId") cId: Int,
-        @Path("uId") uId: Int,
-        @Path("year") year: Int,
-        @Header("auth") token: String
-    ): Response<Double>
-
-    @GET("/company/{cId}/user/{uId}/holiday/actual/{year}")
-    suspend fun holidayActual(
-        @Path("cId") cId: Int,
-        @Path("uId") uId: Int,
-        @Path("year") year: Int,
-        @Header("auth") token: String
-    ): Response<Double>
-
     @POST("/company/{cId}/user/{uId}/abrequest")
     suspend fun abrequest(
         @Path("cId") cId: Int,
@@ -89,7 +73,7 @@ interface ApiService {
         @Body body: JSONObject
     ): Response<Void>
 
-    @GET("/company/{cId}/user/{uId}/holiday/{start}/{end}")
+    @GET("/company/{cId}/user/{uId}/holidays/{start}/{end}")
     suspend fun holiday(
         @Path("cId") cId: Int,
         @Path("uId") uId: Int,
@@ -103,7 +87,7 @@ interface ApiService {
         fun getInstance(): ApiService {
             if (apiService == null) {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("http://192.168.178.110:8080")
+                    .baseUrl("http://h2955028.stratoserver.net:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .build()

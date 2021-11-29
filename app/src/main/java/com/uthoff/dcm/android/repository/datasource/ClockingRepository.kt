@@ -5,7 +5,7 @@ import com.uthoff.dcm.android.repository.model.User
 import org.json.JSONObject
 import retrofit2.Response
 
-class ClockingRepository {
+class ClockingRepository{
     private val TERMINAL_ID = 1101
 
     suspend fun clocking(user: User, status: Int): Response<Void> {

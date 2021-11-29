@@ -143,6 +143,7 @@ class AbRequestFragment : Fragment() {
                     }
                     .show()
             } else {
+                viewModel.checkAbRequest()
                 val abRequestBottomSheet = AbRequestBottomSheet(viewModel)
                 abRequestBottomSheet.show(childFragmentManager, "AbRequestBottomSheet")
             }

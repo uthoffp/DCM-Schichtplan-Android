@@ -12,16 +12,6 @@ class AbRequestRepository {
         return apiService.specialTime(user.company.toInt(), user.token)
     }
 
-    suspend fun holidayPlanned(user: User, year: Int): Response<Double> {
-        val apiService: ApiService = ApiService.getInstance()
-        return apiService.holidayActual(user.company.toInt(), user.uId.toInt(), year, user.token)
-    }
-
-    suspend fun holidayActual(user: User, year: Int): Response<Double> {
-        val apiService: ApiService = ApiService.getInstance()
-        return apiService.holidayPlanned(user.company.toInt(), user.uId.toInt(), year, user.token)
-    }
-
     suspend fun postAbRequest(
         user: User,
         start: String,
