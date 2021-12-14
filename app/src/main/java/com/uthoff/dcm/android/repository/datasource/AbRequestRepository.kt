@@ -24,7 +24,7 @@ class AbRequestRepository {
         val apiService: ApiService = ApiService.getInstance()
         val json = JSONObject()
         json.put("department", user.department)
-        json.put("type", startHalf)
+        json.put("type", startHalf) //TODO set correct type
         json.put("start", start)
         json.put("startHalf", startHalf)
         json.put("stop", stop)
